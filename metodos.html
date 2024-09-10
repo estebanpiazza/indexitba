@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos Comunes de Arrays en JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #eee;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        li:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Métodos Comunes de Arrays</h1>
+    Aquí tienes el `<ul>` actualizado con un resumen de los parámetros que recibe cada método:
+
+        ```html
+        <ul>
+            <li><strong>map()</strong>: Aplica una función a cada elemento del array y devuelve un nuevo array. 
+                <br><em>Parámetros:</em> callback(elemento, índice, array).
+            </li>
+            <li><strong>filter()</strong>: Crea un nuevo array con los elementos que cumplen una condición. 
+                <br><em>Parámetros:</em> callback(elemento, índice, array).
+            </li>
+            <li><strong>reduce()</strong>: Aplica una función a cada elemento y reduce el array a un único valor. 
+                <br><em>Parámetros:</em> callback(acumulador, elemento, índice, array), valorInicial (opcional).
+            </li>
+            <li><strong>forEach()</strong>: Ejecuta una función en cada elemento del array (sin devolver nada). 
+                <br><em>Parámetros:</em> callback(elemento, índice, array).
+            </li>
+            <li><strong>find()</strong>: Devuelve el primer elemento que cumple una condición. 
+                <br><em>Parámetros:</em> callback(elemento, índice, array).
+            </li>
+            <li><strong>findIndex()</strong>: Devuelve el índice del primer elemento que cumple una condición. 
+                <br><em>Parámetros:</em> callback(elemento, índice, array).
+            </li>
+            <li><strong>includes()</strong>: Verifica si un valor está presente en el array. 
+                <br><em>Parámetros:</em> valorBuscado, índiceDesde (opcional).
+            </li>
+            <li><strong>some()</strong>: Verifica si al menos un elemento cumple una condición. 
+                <br><em>Parámetros:</em> callback(elemento, índice, array).
+            </li>
+            <li><strong>every()</strong>: Verifica si todos los elementos cumplen una condición. 
+                <br><em>Parámetros:</em> callback(elemento, índice, array).
+            </li>
+            <li><strong>push()</strong>: Añade uno o más elementos al final del array. 
+                <br><em>Parámetros:</em> elemento1, elemento2, ..., elementoN.
+            </li>
+            <li><strong>pop()</strong>: Elimina y devuelve el último elemento del array. 
+                <br><em>Parámetros:</em> Ninguno.
+            </li>
+            <li><strong>shift()</strong>: Elimina y devuelve el primer elemento del array. 
+                <br><em>Parámetros:</em> Ninguno.
+            </li>
+            <li><strong>unshift()</strong>: Añade uno o más elementos al principio del array. 
+                <br><em>Parámetros:</em> elemento1, elemento2, ..., elementoN.
+            </li>
+            <li><strong>slice()</strong>: Devuelve una copia superficial de una porción del array. 
+                <br><em>Parámetros:</em> inicio, fin (opcional).
+            </li>
+            <li><strong>splice()</strong>: Añade, elimina o reemplaza elementos en el array. 
+                <br><em>Parámetros:</em> índiceInicio, númeroElementosAEliminar (opcional), elementosAInsertar.
+            </li>
+            <li><strong>concat()</strong>: Combina dos o más arrays y devuelve un nuevo array. 
+                <br><em>Parámetros:</em> array1, array2, ..., arrayN.
+            </li>
+            <li><strong>join()</strong>: Combina todos los elementos del array en un string. 
+                <br><em>Parámetros:</em> separador (opcional).
+            </li>
+            <li><strong>reverse()</strong>: Invierte el orden de los elementos del array. 
+                <br><em>Parámetros:</em> Ninguno.
+            </li>
+            <li><strong>sort()</strong>: Ordena los elementos del array según una función de comparación. 
+                <br><em>Parámetros:</em> funciónComparación (opcional).
+            </li>
+            <li><strong>flat()</strong>: Devuelve un nuevo array con todos los sub-arrays concatenados hasta la profundidad especificada. 
+                <br><em>Parámetros:</em> profundidad (opcional, por defecto es 1).
+            </li>
+            <li><strong>flatMap()</strong>: Aplica una función a cada elemento y aplana el resultado en un nuevo array. 
+                <br><em>Parámetros:</em> callback(elemento, índice, array).
+            </li>
+        </ul>
+        ```
+</div>
+
+</body>
+</html>
