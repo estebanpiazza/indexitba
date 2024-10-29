@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoevaluación de Trabajo Práctico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        select {
+            width: 100%;
+            padding: 5px;
+        }
+        .calculate-btn {
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .calculate-btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Autoevaluación del Trabajo Práctico</h1>
+    <p>Selecciona tu nivel en cada criterio y haz clic en "Calcular Nota" para ver tu puntaje final.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Criterio</th>
+                <th>Insuficiente (1)</th>
+                <th>Regular (2)</th>
+                <th>Bueno (3)</th>
+                <th>Excelente (4)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>HTML</td>
+                <td>Estructura básica incorrecta; etiquetas esenciales no aplicadas adecuadamente.</td>
+                <td>HTML con estructura básica y etiquetas principales, pero sin jerarquía o uso de semántica.</td>
+                <td>HTML estructurado con jerarquía clara; etiquetas semánticas básicas aplicadas correctamente.</td>
+                <td>HTML bien organizado y semántico, con estructura clara y optimización del código.</td>
+            </tr>
+            <tr>
+                <td>CSS</td>
+                <td>Estilos desorganizados; sin diseño estructurado ni uso adecuado de propiedades.</td>
+                <td>Estilos básicos con diseño funcional, pero falta de estructura o consistencia.</td>
+                <td>CSS organizado con un diseño responsive para dispositivos móviles y de escritorio.</td>
+                <td>CSS optimizado con diseño avanzado y responsivo, usando Flexbox o Grid según necesidad.</td>
+            </tr>
+            <tr>
+                <td>JavaScript</td>
+                <td>Falta de interactividad o funciones básicas; código sin estructura.</td>
+                <td>Funciones básicas y mínima interactividad, pero sin modularidad o reutilización de código.</td>
+                <td>Código organizado, con funciones reutilizables y buenas prácticas, pero sin estructura avanzada.</td>
+                <td>Código modular y bien organizado, con un manejo óptimo de lógica y funcionalidades CRUD completas.</td>
+            </tr>
+            <tr>
+                <td>Responsividad</td>
+                <td>No hay adaptación a dispositivos móviles o de escritorio.</td>
+                <td>Adaptación parcial; problemas de visualización en dispositivos móviles o de escritorio.</td>
+                <td>Diseño responsivo que se adapta a dispositivos móviles y de escritorio con algunos ajustes necesarios.</td>
+                <td>Diseño completamente adaptado y optimizado para dispositivos móviles y de escritorio sin problemas de visualización.</td>
+            </tr>
+            <tr>
+                <td>Usabilidad</td>
+                <td>Navegación confusa, diseño desorganizado y falta de coherencia visual.</td>
+                <td>Navegación funcional pero no intuitiva; diseño básico y limitado en usabilidad.</td>
+                <td>Navegación clara y lógica; diseño visual con coherencia y buena experiencia de usuario.</td>
+                <td>Navegación altamente intuitiva y eficiente, con un diseño visual atractivo que facilita la usabilidad.</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Recuerde que debe obtener EXCELENTE en los 5 items, en caso contrario, el trabajo estará desaprobado.</h2>
+    
+
+<!--     <button class="calculate-btn" onclick="calculateScore()">Calcular Nota</button>
+
+    <div class="result" id="result"></div> -->
+
+    <script>
+        function calculateScore() {
+            // Obtén los valores seleccionados
+            const htmlScore = parseInt(document.getElementById("html").value);
+            const cssScore = parseInt(document.getElementById("css").value);
+            const jsScore = parseInt(document.getElementById("javascript").value);
+            const responsivenessScore = parseInt(document.getElementById("responsiveness").value);
+            const usabilityScore = parseInt(document.getElementById("usability").value);
+
+            // Calcula el promedio
+            const averageScore = (htmlScore + cssScore + jsScore + responsivenessScore + usabilityScore) / 5;
+
+            // Mostrar el resultado
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `<strong>Tu Nota Final:</strong> ${averageScore.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
