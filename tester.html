@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pruebas de Inventario de Libros</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.4/chai.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/9.1.3/mocha.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/9.1.3/mocha.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        textarea { width: 100%; height: 300px; margin-bottom: 10px; }
+        #testResults { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Verificador de Código de Inventario</h1>
+    
+    <textarea id="codeInput" placeholder="Pega aquí tu código de inventario.js"></textarea>
+    <button id="verifyButton">Verificar Código</button>
+    
+    <div id="mocha"></div>
+    <div id="testResults"></div>
+
+    <script type="module">
+        // Configurar Mocha
+        mocha.setup('bdd');
+        const expect = chai.expect;
+
+        // Función para crear un módulo dinámico desde el texto
+        async function crearModuloDesdeCodigo(codigo) {
+            const blob = new Blob([codigo], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
+            return await import(url);
+        }
+
+        // Función para ejecutar pruebas
+        async function ejecutarPruebas(moduloInventario) {
+            // Limpiar resultados anteriores
+            const testResults = document.getElementById('testResults');
+            testResults.innerHTML = '';
+            document.getElementById('mocha').innerHTML = '';
+
+            // Definir pruebas
+            describe('Sistema de Gestión de Inventario de Libros', () => {
+                // Limpiar inventario antes de cada prueba
+                beforeEach(() => {
+                    moduloInventario.limpiarInventario();
+                });
+
+                // Pruebas para agregar libros
+                describe('Agregar Libros', () => {
+                    it('Debe agregar un libro correctamente', () => {
+                        moduloInventario.agregarLibro('Don Quijote', 'Miguel de Cervantes', 'Clásicos', 20.50, 10);
+                        const libros = moduloInventario.listarLibros();
+                        expect(libros).to.have.lengthOf(1);
+                        expect(libros[0].titulo).to.equal('Don Quijote');
+                        expect(libros[0].valorTotal).to.equal(205);
+                    });
+
+                    it('Debe generar IDs consecutivos', () => {
+                        moduloInventario.agregarLibro('Libro 1', 'Autor 1', 'Categoría', 10, 5);
+                        moduloInventario.agregarLibro('Libro 2', 'Autor 2', 'Categoría', 15, 3);
+                        const libros = moduloInventario.listarLibros();
+                        expect(libros[0].id).to.equal(1);
+                        expect(libros[1].id).to.equal(2);
+                    });
+
+                    it('Verificar datos completos del libro', () => {
+                        moduloInventario.agregarLibro('Libro Prueba', 'Autor Prueba', 'Categoría Prueba', 25, 7);
+                        const libro = moduloInventario.listarLibros()[0];
+                        expect(libro.autor).to.equal('Autor Prueba');
+                        expect(libro.categoria).to.equal('Categoría Prueba');
+                        expect(libro.precio).to.equal(25);
+                        expect(libro.stock).to.equal(7);
+                    });
+                });
+
+                // Pruebas para modificar libros
+                describe('Modificar Libros', () => {
+                    it('Debe modificar precio y stock de un libro', () => {
+                        moduloInventario.agregarLibro('Test Book', 'Test Author', 'Test', 10, 5);
+                        const libro = moduloInventario.listarLibros()[0];
+                        moduloInventario.modificarLibro(libro.id, 15, 8);
+                        
+                        expect(moduloInventario.listarLibros()[0].precio).to.equal(15);
+                        expect(moduloInventario.listarLibros()[0].stock).to.equal(8);
+                        expect(moduloInventario.listarLibros()[0].valorTotal).to.equal(120);
+                    });
+
+                    it('No debe modificar libro inexistente', () => {
+                        const longitudInicial = moduloInventario.listarLibros().length;
+                        moduloInventario.modificarLibro(999, 20, 10);
+                        expect(moduloInventario.listarLibros().length).to.equal(longitudInicial);
+                    });
+                });
+
+                // Pruebas para eliminar libros
+                describe('Eliminar Libros', () => {
+                    it('Debe eliminar un libro existente', () => {
+                        moduloInventario.agregarLibro('Libro a Eliminar', 'Autor', 'Categoría', 10, 5);
+                        const libro = moduloInventario.listarLibros()[0];
+                        moduloInventario.eliminarLibro(libro.id);
+                        expect(moduloInventario.listarLibros()).to.have.lengthOf(0);
+                    });
+
+                    it('No debe fallar al eliminar libro inexistente', () => {
+                        moduloInventario.agregarLibro('Test Book', 'Test Author', 'Test', 10, 5);
+                        const longitudInicial = moduloInventario.listarLibros().length;
+                        moduloInventario.eliminarLibro(999);
+                        expect(moduloInventario.listarLibros().length).to.equal(longitudInicial);
+                    });
+                });
+
+                // Pruebas para validación y listado
+                describe('Validación y Listado', () => {
+                    it('Debe validar libro existente', () => {
+                        moduloInventario.agregarLibro('Validar Libro', 'Autor', 'Categoría', 10, 5);
+                        const libro = moduloInventario.listarLibros()[0];
+                        expect(moduloInventario.validarLibro(libro.id)).to.be.true;
+                    });
+
+                    it('Debe retornar falso para libro inexistente', () => {
+                        expect(moduloInventario.validarLibro(999)).to.be.false;
+                    });
+
+                    it('Debe listar libros correctamente', () => {
+                        moduloInventario.agregarLibro('Libro 1', 'Autor 1', 'Cat 1', 10, 5);
+                        moduloInventario.agregarLibro('Libro 2', 'Autor 2', 'Cat 2', 15, 3);
+                        const libros = moduloInventario.listarLibros();
+                        expect(libros).to.have.lengthOf(2);
+                    });
+                });
+            });
+
+            // Ejecutar pruebas
+            return new Promise((resolve) => {
+                mocha.run((failures) => {
+                    const testResults = document.getElementById('testResults');
+                    const resultDiv = document.createElement('div');
+                    
+                    if (failures === 0) {
+                        resultDiv.innerHTML = `<h2 style="color: green;">✅ Todos los tests pasaron (${failures} fallos)</h2>`;
+                    } else {
+                        resultDiv.innerHTML = `<h2 style="color: red;">❌ Algunos tests fallaron (${failures} fallos)</h2>`;
+                    }
+                    
+                    testResults.appendChild(resultDiv);
+                    resolve();
+                });
+            });
+        }
+
+        // Listener para el botón de verificación
+        document.getElementById('verifyButton').addEventListener('click', async () => {
+            const codigoInput = document.getElementById('codeInput').value;
+            
+            try {
+                // Crear módulo dinámico desde el código
+                const moduloInventario = await crearModuloDesdeCodigo(codigoInput);
+                
+                // Ejecutar pruebas
+                await ejecutarPruebas(moduloInventario);
+            } catch (error) {
+                const testResults = document.getElementById('testResults');
+                testResults.innerHTML = `<h2 style="color: red;">❌ Error al cargar el código: ${error.message}</h2>`;
+            }
+        });
+    </script>
+</body>
+</html>
