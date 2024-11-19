@@ -22,6 +22,7 @@
     <div id="testResults"></div>
 
     <script type="module">
+        let inventario = [];
         // Configurar Mocha
         mocha.setup('bdd');
         const expect = chai.expect;
@@ -44,7 +45,7 @@
             describe('Sistema de Gestión de Inventario de Libros', () => {
                 // Limpiar inventario antes de cada prueba
                 beforeEach(() => {
-                    moduloInventario.limpiarInventario();
+                    inventario = []
                 });
 
                 // Pruebas para agregar libros
