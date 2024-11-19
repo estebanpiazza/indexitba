@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Playground</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+        #editor, #console {
+            width: 50%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #editor {
+            background-color: #f4f4f4;
+        }
+        #console {
+            background-color: #333;
+            color: #0f0;
+            overflow-y: scroll;
+        }
+        textarea {
+            width: 100%;
+            height: 70%;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="editor">
+        <h2>Código JavaScript</h2>
+        <textarea id="codeInput" placeholder="Escribe tu código aquí..."></textarea>
+        <button onclick="ejecutarCodigo()">Ejecutar</button>
+    </div>
+    
+    <div id="console">
+        <h2>Consola</h2>
+        <div id="consoleOutput"></div>
+    </div>
+
+    <script>
+        // Redirigir console.log para mostrar en div
+        const consoleOutput = document.getElementById('consoleOutput');
+        const originalLog = console.log;
+        console.log = function() {
+            const output = Array.from(arguments)
+                .map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg)
+                .join(' ');
+            
+            const lineElement = document.createElement('div');
+            lineElement.textContent = output;
+            consoleOutput.appendChild(lineElement);
+        };
+
+        function ejecutarCodigo() {
+            const codigo = document.getElementById('codeInput').value;
+            consoleOutput.innerHTML = ''; // Limpiar consola anterior
+            
+            try {
+                // Usar Function constructor para ejecutar en ámbito global
+                const ejecutar = new Function(codigo);
+                ejecutar();
+            } catch (error) {
+                const errorElement = document.createElement('div');
+                errorElement.style.color = 'red';
+                errorElement.textContent = `Error: ${error.message}`;
+                consoleOutput.appendChild(errorElement);
+            }
+        }
+    </script>
+</body>
+</html>
