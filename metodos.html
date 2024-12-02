@@ -2,141 +2,347 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Métodos Comunes de Arrays en JavaScript</title>
+    <title>Métodos de Arrays en JavaScript</title>
     <style>
-      body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
 
-.container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 1200px;
-    margin: 20px;
-}
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-h1 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
 
-ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    list-style-type: none;
-    padding: 0;
-}
+        .method-card {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
 
-li {
-    background-color: #eee;
-    padding: 15px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-    text-align: left;
-}
+        .method-name {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
 
-li:hover {
-    background-color: #ddd;
-}
+        .description {
+            margin-bottom: 15px;
+        }
 
-strong {
-    color: #333;
-    font-size: 1.1em;
-    display: block;
-    margin-bottom: 10px;
-}
+        .parameters {
+            background: #e9ecef;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
 
-em {
-    font-size: 0.9em;
-    color: #555;
-}
+        .example {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            overflow-x: auto;
+        }
 
+        .output {
+            background: #f1f8ff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Guía Completa de Métodos de Arrays en JavaScript</h1>
 
-<div class="container">
-    <h1>Métodos Comunes de Arrays</h1>
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Transformación</span>
+                map()
+            </div>
+            <div class="description">
+                Crea un nuevo array aplicando una función a cada elemento del array original.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(elemento, índice, array)
+            </div>
+            <div class="example">
+                const números = [1, 2, 3, 4];
+                const duplicados = números.map(x => x * 2);
+                console.log(duplicados);
+                
+                // Ejemplo más complejo
+                const productos = [
+                    { nombre: 'Laptop', precio: 1000 },
+                    { nombre: 'Mouse', precio: 20 }
+                ];
+                const precios = productos.map(producto => ({
+                    ...producto,
+                    precioConIVA: producto.precio * 1.21
+                }));
+            </div>
+            <div class="output">
+                // Resultado: [2, 4, 6, 8]
+            </div>
+        </div>
 
-        <ul>
-            <li><strong>map()</strong>: Aplica una función a cada elemento del array y devuelve un nuevo array. 
-                <br><em>Parámetros:</em> callback(elemento, índice, array).
-            </li>
-            <li><strong>filter()</strong>: Crea un nuevo array con los elementos que cumplen una condición. 
-                <br><em>Parámetros:</em> callback(elemento, índice, array).
-            </li>
-            <li><strong>reduce()</strong>: Aplica una función a cada elemento y reduce el array a un único valor. 
-                <br><em>Parámetros:</em> callback(acumulador, elemento, índice, array), valorInicial (opcional).
-            </li>
-            <li><strong>forEach()</strong>: Ejecuta una función en cada elemento del array (sin devolver nada). 
-                <br><em>Parámetros:</em> callback(elemento, índice, array).
-            </li>
-            <li><strong>find()</strong>: Devuelve el primer elemento que cumple una condición. 
-                <br><em>Parámetros:</em> callback(elemento, índice, array).
-            </li>
-            <li><strong>findIndex()</strong>: Devuelve el índice del primer elemento que cumple una condición. 
-                <br><em>Parámetros:</em> callback(elemento, índice, array).
-            </li>
-            <li><strong>includes()</strong>: Verifica si un valor está presente en el array. 
-                <br><em>Parámetros:</em> valorBuscado, índiceDesde (opcional).
-            </li>
-            <li><strong>some()</strong>: Verifica si al menos un elemento cumple una condición. 
-                <br><em>Parámetros:</em> callback(elemento, índice, array).
-            </li>
-            <li><strong>every()</strong>: Verifica si todos los elementos cumplen una condición. 
-                <br><em>Parámetros:</em> callback(elemento, índice, array).
-            </li>
-            <li><strong>push()</strong>: Añade uno o más elementos al final del array. 
-                <br><em>Parámetros:</em> elemento1, elemento2, ..., elementoN.
-            </li>
-            <li><strong>pop()</strong>: Elimina y devuelve el último elemento del array. 
-                <br><em>Parámetros:</em> Ninguno.
-            </li>
-            <li><strong>shift()</strong>: Elimina y devuelve el primer elemento del array. 
-                <br><em>Parámetros:</em> Ninguno.
-            </li>
-            <li><strong>unshift()</strong>: Añade uno o más elementos al principio del array. 
-                <br><em>Parámetros:</em> elemento1, elemento2, ..., elementoN.
-            </li>
-            <li><strong>slice()</strong>: Devuelve una copia superficial de una porción del array. 
-                <br><em>Parámetros:</em> inicio, fin (opcional).
-            </li>
-            <li><strong>splice()</strong>: Añade, elimina o reemplaza elementos en el array. 
-                <br><em>Parámetros:</em> índiceInicio, númeroElementosAEliminar (opcional), elementosAInsertar.
-            </li>
-            <li><strong>concat()</strong>: Combina dos o más arrays y devuelve un nuevo array. 
-                <br><em>Parámetros:</em> array1, array2, ..., arrayN.
-            </li>
-            <li><strong>join()</strong>: Combina todos los elementos del array en un string. 
-                <br><em>Parámetros:</em> separador (opcional).
-            </li>
-            <li><strong>reverse()</strong>: Invierte el orden de los elementos del array. 
-                <br><em>Parámetros:</em> Ninguno.
-            </li>
-            <li><strong>sort()</strong>: Ordena los elementos del array según una función de comparación. 
-                <br><em>Parámetros:</em> funciónComparación (opcional).
-            </li>
-            <li><strong>flat()</strong>: Devuelve un nuevo array con todos los sub-arrays concatenados hasta la profundidad especificada. 
-                <br><em>Parámetros:</em> profundidad (opcional, por defecto es 1).
-            </li>
-            <li><strong>flatMap()</strong>: Aplica una función a cada elemento y aplana el resultado en un nuevo array. 
-                <br><em>Parámetros:</em> callback(elemento, índice, array).
-            </li>
-        </ul>
-        ```
-</div>
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Filtrado</span>
+                filter()
+            </div>
+            <div class="description">
+                Crea un nuevo array con los elementos que cumplen una condición específica.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(elemento, índice, array)
+            </div>
+            <div class="example">
+                const puntuaciones = [85, 92, 60, 75, 95];
+                const aprobados = puntuaciones.filter(nota => nota >= 70);
+                
+                // Ejemplo más complejo
+                const tareas = [
+                    { id: 1, completada: true, prioridad: 'alta' },
+                    { id: 2, completada: false, prioridad: 'alta' },
+                    { id: 3, completada: true, prioridad: 'baja' }
+                ];
+                const tareasUrgentes = tareas.filter(
+                    tarea => !tarea.completada && tarea.prioridad === 'alta'
+                );
+            </div>
+            <div class="output">
+                // Resultado: [85, 92, 75, 95]
+            </div>
+        </div>
 
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Reducción</span>
+                reduce()
+            </div>
+            <div class="description">
+                Reduce un array a un único valor (acumulando de izquierda a derecha).
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(acumulador, elemento, índice, array), valorInicial
+            </div>
+            <div class="example">
+                const carrito = [
+                    { producto: 'Camisa', precio: 25 },
+                    { producto: 'Pantalón', precio: 50 },
+                    { producto: 'Zapatos', precio: 80 }
+                ];
+                
+                const total = carrito.reduce(
+                    (acum, item) => acum + item.precio, 
+                    0
+                );
+                
+                // Ejemplo más complejo: agrupar por categoría
+                const productos = [
+                    { nombre: 'Manzana', categoria: 'Frutas' },
+                    { nombre: 'Zanahoria', categoria: 'Verduras' },
+                    { nombre: 'Pera', categoria: 'Frutas' }
+                ];
+                
+                const porCategoria = productos.reduce((acum, prod) => {
+                    acum[prod.categoria] = acum[prod.categoria] || [];
+                    acum[prod.categoria].push(prod.nombre);
+                    return acum;
+                }, {});
+            </div>
+            <div class="output">
+                // Resultado total: 155
+                // Resultado agrupación: { 
+                //   Frutas: ['Manzana', 'Pera'], 
+                //   Verduras: ['Zanahoria'] 
+                // }
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Nuevo</span>
+                at()
+            </div>
+            <div class="description">
+                Devuelve el elemento en el índice especificado, permitiendo índices negativos.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> índice (número)
+            </div>
+            <div class="example">
+                const frutas = ['manzana', 'banana', 'naranja'];
+                
+                console.log(frutas.at(-1));  // último elemento
+                console.log(frutas.at(-2));  // penúltimo elemento
+                console.log(frutas.at(0));   // primer elemento
+            </div>
+            <div class="output">
+                // 'naranja'
+                // 'banana'
+                // 'manzana'
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Búsqueda</span>
+                findLast()
+            </div>
+            <div class="description">
+                Devuelve el último elemento que cumple con la condición especificada.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(elemento, índice, array)
+            </div>
+            <div class="example">
+                const números = [1, 3, 5, 6, 8, 9, 11];
+                const últimoPar = números.findLast(n => n % 2 === 0);
+                
+                const usuarios = [
+                    { id: 1, nombre: 'Ana', activo: true },
+                    { id: 2, nombre: 'Juan', activo: false },
+                    { id: 3, nombre: 'María', activo: true }
+                ];
+                
+                const últimoActivo = usuarios.findLast(u => u.activo);
+            </div>
+            <div class="output">
+                // últimoPar: 8
+                // últimoActivo: { id: 3, nombre: 'María', activo: true }
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Nuevo</span>
+                toSorted()
+            </div>
+            <div class="description">
+                Devuelve un nuevo array con los elementos ordenados (versión no mutante de sort()).
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> compareFn (opcional)
+            </div>
+            <div class="example">
+                const puntos = [40, 100, 1, 5, 25, 10];
+                const ordenados = puntos.toSorted((a, b) => a - b);
+                
+                // El array original permanece sin cambios
+                console.log(puntos);
+                console.log(ordenados);
+                
+                // Ordenar objetos
+                const personas = [
+                    { nombre: 'Ana', edad: 25 },
+                    { nombre: 'Juan', edad: 30 },
+                    { nombre: 'María', edad: 20 }
+                ];
+                
+                const porEdad = personas.toSorted((a, b) => a.edad - b.edad);
+            </div>
+            <div class="output">
+                // puntos: [40, 100, 1, 5, 25, 10]
+                // ordenados: [1, 5, 10, 25, 40, 100]
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Nuevo</span>
+                toReversed()
+            </div>
+            <div class="description">
+                Devuelve un nuevo array con los elementos en orden inverso (versión no mutante de reverse()).
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> Ninguno
+            </div>
+            <div class="example">
+                const original = ['uno', 'dos', 'tres'];
+                const invertido = original.toReversed();
+                
+                // El array original permanece sin cambios
+                console.log(original);
+                console.log(invertido);
+            </div>
+            <div class="output">
+                // original: ['uno', 'dos', 'tres']
+                // invertido: ['tres', 'dos', 'uno']
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Búsqueda</span>
+                group() [Stage 3]
+            </div>
+            <div class="description">
+                Agrupa los elementos del array según una función de clasificación.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(elemento, índice, array)
+            </div>
+            <div class="example">
+                const inventario = [
+                    { nombre: 'manzanas', tipo: 'fruta' },
+                    { nombre: 'zanahorias', tipo: 'verdura' },
+                    { nombre: 'plátanos', tipo: 'fruta' }
+                ];
+
+                const porTipo = inventario.group(item => item.tipo);
+                
+                // Ejemplo más complejo
+                const números = [1, 2, 3, 4, 5, 6];
+                const porParidad = números.group(num => 
+                    num % 2 === 0 ? 'pares' : 'impares'
+                );
+            </div>
+            <div class="output">
+                // porTipo: {
+                //   fruta: [
+                //     { nombre: 'manzanas', tipo: 'fruta' },
+                //     { nombre: 'plátanos', tipo: 'fruta' }
+                //   ],
+                //   verdura: [
+                //     { nombre: 'zanahorias', tipo: 'verdura' }
+                //   ]
+                // }
+            </div>
+        </div>
+    </div>
 </body>
 </html>
