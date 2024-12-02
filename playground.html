@@ -2,75 +2,125 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>JavaScript Playground</title>
+    <title>Playground JavaScript</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
         }
-        #editor, #console {
-            width: 50%;
-            padding: 10px;
-            box-sizing: border-box;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
+
+        .editor-section, .console-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: #3498db;
+            border-radius: 2px;
+        }
+
         #editor {
-            background-color: #f4f4f4;
+            background: #1e1e1e;
+            border-radius: 6px;
+            padding: 15px;
+            color: #fff;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            min-height: 200px;
         }
-        #console {
-            background-color: #333;
-            color: #0f0;
-            overflow-y: scroll;
+
+        #consoleOutput {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            min-height: 100px;
+            border: 1px solid #dee2e6;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
         }
-        textarea {
-            width: 100%;
-            height: 70%;
-        }
-        button {
+
+        .btn-run {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
             margin-top: 10px;
+        }
+
+        .btn-run:hover {
+            background: #27ae60;
+        }
+
+        .btn-run:active {
+            transform: translateY(1px);
         }
     </style>
 </head>
 <body>
-    <div id="editor">
-        <h2>Código JavaScript</h2>
-        <textarea id="codeInput" placeholder="Escribe tu código aquí..."></textarea>
-        <button onclick="ejecutarCodigo()">Ejecutar</button>
-    </div>
-    
-    <div id="console">
-        <h2>Consola</h2>
-        <div id="consoleOutput"></div>
+    <div class="container">
+        <div class="editor-section">
+            <h2>Código JavaScript</h2>
+            <div id="editor" contenteditable="true">// Escribe tu código aquí</div>
+            <button class="btn-run" onclick="executeCode()">
+                Ejecutar código
+            </button>
+        </div>
+
+        <div class="console-section">
+            <h2>Consola</h2>
+            <div id="consoleOutput"></div>
+        </div>
     </div>
 
     <script>
-        // Redirigir console.log para mostrar en div
-        const consoleOutput = document.getElementById('consoleOutput');
-        const originalLog = console.log;
-        console.log = function() {
-            const output = Array.from(arguments)
-                .map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg)
-                .join(' ');
+        function executeCode() {
+            const code = document.getElementById('editor').innerText;
+            const consoleOutput = document.getElementById('consoleOutput');
             
-            const lineElement = document.createElement('div');
-            lineElement.textContent = output;
-            consoleOutput.appendChild(lineElement);
-        };
-
-        function ejecutarCodigo() {
-            const codigo = document.getElementById('codeInput').value;
-            consoleOutput.innerHTML = ''; // Limpiar consola anterior
+            // Limpia la consola antes de cada ejecución
+            consoleOutput.innerHTML = '';
             
             try {
-                // Usar Function constructor para ejecutar en ámbito global
-                const ejecutar = new Function(codigo);
-                ejecutar();
+                // Captura la salida de console.log
+                const oldLog = console.log;
+                console.log = function(...args) {
+                    consoleOutput.innerHTML += args.join(' ') + '<br>';
+                    oldLog.apply(console, args);
+                };
+                
+                // Ejecuta el código
+                eval(code);
+                
+                // Restaura console.log
+                console.log = oldLog;
             } catch (error) {
-                const errorElement = document.createElement('div');
-                errorElement.style.color = 'red';
-                errorElement.textContent = `Error: ${error.message}`;
-                consoleOutput.appendChild(errorElement);
+                consoleOutput.innerHTML += `<span style="color: red">Error: ${error.message}</span>`;
             }
         }
     </script>
