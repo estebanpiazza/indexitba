@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editor Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, system-ui, sans-serif;
+            height: 100vh;
+            background: #1e1e1e;
+            color: #fff;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 1fr;
+            height: 100vh;
+            gap: 4px;
+        }
+        .editors {
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 4px;
+            background: #2d2d2d;
+            padding: 4px;
+        }
+        .preview {
+            background: white;
+            padding: 4px;
+        }
+        .editor-container {
+            background: #1e1e1e;
+            border-radius: 4px;
+            padding: 8px;
+        }
+        .editor-header {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            padding: 4px;
+            border-bottom: 1px solid #333;
+        }
+        .editor {
+            width: 100%;
+            height: calc(100% - 35px);
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Monaco', monospace;
+            resize: none;
+            outline: none;
+            font-size: 14px;
+        }
+        #preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="editors">
+            <div class="editor-container">
+                <div class="editor-header">HTML</div>
+                <textarea class="editor" id="html-editor" spellcheck="false"></textarea>
+            </div>
+            <div class="editor-container">
+                <div class="editor-header">CSS</div>
+                <textarea class="editor" id="css-editor" spellcheck="false"></textarea>
+            </div>
+            <div class="editor-container">
+                <div class="editor-header">JavaScript</div>
+                <textarea class="editor" id="js-editor" spellcheck="false"></textarea>
+            </div>
+        </div>
+        <div class="preview">
+            <iframe id="preview-frame"></iframe>
+        </div>
+    </div>
+    <script>
+        const htmlEditor = document.getElementById('html-editor');
+        const cssEditor = document.getElementById('css-editor');
+        const jsEditor = document.getElementById('js-editor');
+        const previewFrame = document.getElementById('preview-frame');
+
+        function updatePreview() {
+            const html = htmlEditor.value;
+            const css = cssEditor.value;
+            const js = jsEditor.value;
+
+            const previewContent = `
+                <!DOCTYPE html>
+                <html>
+                    <head>
+                        <style>${css}</style>
+                    </head>
+                    <body>
+                        ${html}
+                        <script>${js}<\/script>
+                    </body>
+                </html>
+            `;
+
+            const iframe = document.getElementById('preview-frame');
+            iframe.srcdoc = previewContent;
+        }
+
+        [htmlEditor, cssEditor, jsEditor].forEach(editor => {
+            editor.addEventListener('input', updatePreview);
+        });
+
+        // Auto-update on initial load
+        updatePreview();
+    </script>
+</body>
+</html>
