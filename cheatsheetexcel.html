@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Cheat Sheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #0066cc;
+        }
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 4px;
+        }
+        .category {
+            margin-bottom: 20px;
+        }
+        code {
+            display: block;
+            background: #eee;
+            padding: 8px;
+            margin: 4px 0;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📊 Excel Cheat Sheet</h1>
+
+<div class="category">
+    <h2>🕒 Funciones de Fecha y Hora</h2>
+    <code>=AHORA()                      👉 Fecha y hora actuales</code>
+    <code>=HOY()                        👉 Fecha actual</code>
+    <code>=AÑO(FECHA)                   👉 Año de una fecha</code>
+    <code>=MES(FECHA)                   👉 Mes de una fecha</code>
+    <code>=DIA(FECHA)                   👉 Día de una fecha</code>
+    <code>=DIASEM(FECHA;1)              👉 Día de la semana (1=lunes)</code>
+    <code>=HORA(NÚMERO DE SERIE)        👉 Hora de una fecha/hora</code>
+    <code>=MINUTO(NÚMERO DE SERIE)      👉 Minuto de una fecha/hora</code>
+    <code>=SEGUNDO(NÚMERO DE SERIE)     👉 Segundo de una fecha/hora</code>
+    <code>=FECHA(AÑO; MES; DÍA)         👉 Crea una fecha</code>
+</div>
+
+<div class="category">
+    <h2>🔢 Funciones Matemáticas</h2>
+    <code>=ALEATORIO.ENTRE(INFERIOR; SUPERIOR)    👉 Número aleatorio entre límites</code>
+    <code>=ATAN(NÚMERO)                           👉 Arcotangente</code>
+    <code>=COS(NÚMERO)                            👉 Coseno</code>
+    <code>=SENO(NÚMERO)                           👉 Seno</code>
+    <code>=TAN(NÚMERO)                            👉 Tangente</code>
+    <code>=EXP(NÚMERO)                            👉 e elevado a un número</code>
+    <code>=LN(NÚMERO)                             👉 Logaritmo natural</code>
+    <code>=LOG(NÚMERO; BASE)                      👉 Logaritmo en base específica</code>
+    <code>=LOG10(NÚMERO)                          👉 Logaritmo en base 10</code>
+    <code>=RAÍZ(NÚMERO)                           👉 Raíz cuadrada</code>
+    <code>=ENTERO(NÚMERO)                         👉 Redondear hacia abajo</code>
+    <code>=DECIMAL(NÚMERO; DECIMALES)             👉 Redondear a X decimales</code>
+    <code>=PI()                                   👉 Valor de π</code>
+    <code>=FACT(NÚMERO)                           👉 Factorial</code>
+</div>
+
+<div class="category">
+    <h2>🧮 Funciones Estadísticas</h2>
+    <code>=PROMEDIO(RANGO)                        👉 Media</code>
+    <code>=MEDIANA(RANGO)                         👉 Mediana</code>
+    <code>=MODA(RANGO)                            👉 Moda</code>
+    <code>=VAR(RANGO)                             👉 Varianza (muestra)</code>
+    <code>=VARP(RANGO)                            👉 Varianza (población)</code>
+    <code>=DESVEST(RANGO)                         👉 Desviación estándar (muestra)</code>
+    <code>=DESVESTP(RANGO)                        👉 Desviación estándar (población)</code>
+    <code>=FRECUENCIA(DATOS; GRUPOS)              👉 Distribución de frecuencia</code>
+    <code>=COEF.DE.CORREL(MATRÍZ_1; MATRÍZ_2)     👉 Correlación</code>
+</div>
+
+<div class="category">
+    <h2>🔍 Funciones de Búsqueda y Referencia</h2>
+    <code>=BUSCARV(VALOR; MATRÍZ; COLUMNA; TIPO)  👉 Búsqueda vertical</code>
+    <code>=BUSCARH(VALOR; MATRÍZ; FILA; TIPO)     👉 Búsqueda horizontal</code>
+    <code>=COINCIDIR(VALOR; MATRÍZ; TIPO)         👉 Posición de un valor</code>
+    <code>=INDICE(MATRÍZ; FILA; COLUMNA)          👉 Valor en una posición</code>
+</div>
+
+<div class="category">
+    <h2>🧠 Funciones Lógicas</h2>
+    <code>=SI(PRUEBA; SI_VERDADERO; SI_FALSO)      👉 Condicional</code>
+    <code>=SI.ERROR(VALOR; VALOR_SI_ERROR)         👉 Manejar errores</code>
+    <code>=Y(cond1; cond2;...)                     👉 Todas las condiciones verdaderas</code>
+    <code>=O(cond1; cond2;...)                     👉 Al menos una condición verdadera</code>
+    <code>=ESBLANCO(VALOR)                         👉 ¿Es celda vacía?</code>
+    <code>=ESERROR(VALOR)                          👉 ¿Es error?</code>
+</div>
+
+<div class="category">
+    <h2>🅰️ Funciones de Texto</h2>
+    <code>=CONCATENAR(TEXTO1; TEXTO2;...)          👉 Unir textos</code>
+    <code>=ESPACIOS(TEXTO)                         👉 Eliminar espacios extra</code>
+    <code>=IZQUIERDA(TEXTO; N)                     👉 N primeros caracteres</code>
+    <code>=DERECHA(TEXTO; N)                       👉 N últimos caracteres</code>
+    <code>=EXTRAE(TEXTO; INICIO; N)                👉 Extraer parte de un texto</code>
+    <code>=LARGO(TEXTO)                            👉 Largo de un texto</code>
+    <code>=MINUSC(TEXTO)                           👉 A minúsculas</code>
+    <code>=MAYUSC(TEXTO)                           👉 A mayúsculas</code>
+    <code>=NOMPROPIO(TEXTO)                        👉 Capitalizar</code>
+    <code>=SUSTITUIR(TEXTO; ORIGINAL; NUEVO; N)    👉 Reemplazo controlado</code>
+    <code>=REEMPLAZAR(TEXTO; INICIO; N; NUEVO)     👉 Reemplazo por posición</code>
+    <code>=TEXTO(VALOR; FORMATO)                   👉 Dar formato personalizado</code>
+    <code>=HALLAR(TEXTO; DENTRO; INICIO)           👉 Buscar posición (sensible a mayúsculas)</code>
+    <code>=ENCONTRAR(TEXTO; DENTRO; INICIO)        👉 Buscar posición (NO sensible)</code>
+</div>
+
+<div class="category">
+    <h2>🧠 Funciones de Matrices</h2>
+    <code>=MMULT(MATRÍZ1; MATRÍZ2)                 👉 Multiplicación de matrices</code>
+    <code>=MDETERM(MATRÍZ)                         👉 Determinante</code>
+    <code>=MINVERSA(MATRÍZ)                        👉 Matriz inversa</code>
+    <code>=TRANSPONER(MATRÍZ)                      👉 Transponer filas ↔ columnas</code>
+</div>
+
+<div class="category">
+    <h2>📋 Funciones de Conteo y Sumatoria</h2>
+    <code>=CONTAR(RANGO)                           👉 Cuenta números</code>
+    <code>=CONTAR.SI(RANGO; CRITERIO)              👉 Cuenta según condición</code>
+    <code>=CONTARA(RANGO)                          👉 Cuenta no vacíos</code>
+    <code>=SUMA(RANGO)                             👉 Suma total</code>
+    <code>=SUMAR.SI(RANGO; CRITERIO; RANGO_SUMA)   👉 Suma condicionada</code>
+    <code>=PROMEDIO.SI(RANGO; CRITERIO; RANGO)     👉 Promedio condicionado</code>
+</div>
+
+<div class="category">
+    <h2>💡 Otros Operadores</h2>
+    <code>^               👉 Potenciación</code>
+    <code>&               👉 Concatenación de textos</code>
+</div>
+
+</body>
+</html>
