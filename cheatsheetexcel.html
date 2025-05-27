@@ -39,107 +39,107 @@
 
 <div class="category">
     <h2>🕒 Funciones de Fecha y Hora</h2>
-    <code>=AHORA() =NOW() 👉 Fecha y hora actuales</code>
-    <code>=HOY() =TODAY() 👉 Fecha actual</code>
-    <code>=AÑO(FECHA) =YEAR(DATE) 👉 Año de una fecha</code>
-    <code>=MES(FECHA) =MONTH(DATE) 👉 Mes de una fecha</code>
-    <code>=DIA(FECHA) =DAY(DATE) 👉 Día de una fecha</code>
-    <code>=DIASEM(FECHA;1) =WEEKDAY(DATE,1) 👉 Día de la semana (1=lunes)</code>
-    <code>=HORA(...) =HOUR(...) 👉 Hora de una fecha/hora</code>
-    <code>=MINUTO(...) =MINUTE(...) 👉 Minuto de una fecha/hora</code>
-    <code>=SEGUNDO(...) =SECOND(...) 👉 Segundo de una fecha/hora</code>
-    <code>=FECHA(...) =DATE(...) 👉 Crea una fecha</code>
+    <code>=AHORA() =NOW() 👉 Devuelve la fecha y hora actuales</code>
+    <code>=HOY() =TODAY() 👉 Devuelve solo la fecha actual</code>
+    <code>=AÑO(fecha) =YEAR(date) 👉 Extrae el año de una fecha</code>
+    <code>=MES(fecha) =MONTH(date) 👉 Extrae el mes de una fecha</code>
+    <code>=DIA(fecha) =DAY(date) 👉 Extrae el día de una fecha</code>
+    <code>=DIASEM(fecha; tipo) =WEEKDAY(date, type) 👉 Devuelve el día de la semana (1=lunes, 2=martes, etc.)</code>
+    <code>=HORA(valor_hora) =HOUR(time_value) 👉 Devuelve la hora de una hora</code>
+    <code>=MINUTO(valor_hora) =MINUTE(time_value) 👉 Devuelve el minuto de una hora</code>
+    <code>=SEGUNDO(valor_hora) =SECOND(time_value) 👉 Devuelve el segundo de una hora</code>
+    <code>=FECHA(año; mes; día) =DATE(year, month, day) 👉 Crea una fecha a partir de año, mes y día</code>
 </div>
 
 <div class="category">
     <h2>🔢 Funciones Matemáticas</h2>
-    <code>=ALEATORIO.ENTRE(...) =RANDBETWEEN(...) 👉 Número aleatorio entre límites</code>
-    <code>=ATAN(...) =ATAN(...) 👉 Arcotangente</code>
-    <code>=COS(...) =COS(...) 👉 Coseno</code>
-    <code>=SENO(...) =SIN(...) 👉 Seno</code>
-    <code>=TAN(...) =TAN(...) 👉 Tangente</code>
-    <code>=EXP(...) =EXP(...) 👉 e elevado a un número</code>
-    <code>=LN(...) =LN(...) 👉 Logaritmo natural</code>
-    <code>=LOG(...) =LOG(...) 👉 Logaritmo en base específica</code>
-    <code>=LOG10(...) =LOG10(...) 👉 Logaritmo en base 10</code>
-    <code>=RAÍZ(...) =SQRT(...) 👉 Raíz cuadrada</code>
-    <code>=ENTERO(...) =INT(...) 👉 Redondear hacia abajo</code>
-    <code>=DECIMAL(...) =ROUND(...) 👉 Redondear a X decimales</code>
-    <code>=PI() =PI() 👉 Valor de π</code>
-    <code>=FACT(...) =FACT(...) 👉 Factorial</code>
+    <code>=ALEATORIO.ENTRE(inferior; superior) =RANDBETWEEN(bottom, top) 👉 Número aleatorio entre los valores que se indican</code>
+    <code>=ATAN(número) =ATAN(number) 👉 Devuelve la arcotangente de un número</code>
+    <code>=COS(número) =COS(number) 👉 Devuelve el coseno del ángulo dado en radianes</code>
+    <code>=SENO(número) =SIN(number) 👉 Devuelve el seno del ángulo dado en radianes</code>
+    <code>=TAN(número) =TAN(number) 👉 Devuelve la tangente del ángulo dado en radianes</code>
+    <code>=EXP(exponente) =EXP(power) 👉 Devuelve e elevado a la potencia dada</code>
+    <code>=LN(número) =LN(number) 👉 Devuelve el logaritmo natural de un número</code>
+    <code>=LOG(número;base) =LOG(number, base) 👉 Devuelve el logaritmo de un número en la base indicada</code>
+    <code>=LOG10(número) =LOG10(number) 👉 Devuelve el logaritmo base 10 de un número</code>
+    <code>=RAÍZ(número) =SQRT(number) 👉 Devuelve la raíz cuadrada de un número</code>
+    <code>=ENTERO(número) =INT(number) 👉 Redondea un número hacia abajo hasta el entero más cercano</code>
+    <code>=DECIMAL(número; decimales) =ROUND(number, num_digits) 👉 Redondea un número a la cantidad de decimales indicados</code>
+    <code>=PI() =PI() 👉 Devuelve el valor de π</code>
+    <code>=FACT(número) =FACT(number) 👉 Devuelve el factorial de un número</code>
 </div>
 
 <div class="category">
     <h2>🧮 Funciones Estadísticas</h2>
-    <code>=PROMEDIO(...) =AVERAGE(...) 👉 Media</code>
-    <code>=MEDIANA(...) =MEDIAN(...) 👉 Mediana</code>
-    <code>=MODA(...) =MODE(...) 👉 Moda</code>
-    <code>=VAR(...) =VAR(...) 👉 Varianza (muestra)</code>
-    <code>=VARP(...) =VARP(...) 👉 Varianza (población)</code>
-    <code>=DESVEST(...) =STDEV(...) 👉 Desviación estándar (muestra)</code>
-    <code>=DESVESTP(...) =STDEVP(...) 👉 Desviación estándar (población)</code>
-    <code>=FRECUENCIA(...) =FREQUENCY(...) 👉 Distribución de frecuencia</code>
-    <code>=COEF.DE.CORREL(...) =CORREL(...) 👉 Correlación</code>
+    <code>=PROMEDIO(rango) =AVERAGE(range) 👉 Devuelve el promedio de un conjunto de valores</code>
+    <code>=MEDIANA(rango) =MEDIAN(range) 👉 Devuelve el valor central de un conjunto de datos</code>
+    <code>=MODA(rango) =MODE(range) 👉 Devuelve el valor que más se repite</code>
+    <code>=VAR(rango) =VAR(range) 👉 Devuelve la varianza de una muestra</code>
+    <code>=VARP(rango) =VARP(range) 👉 Devuelve la varianza de una población</code>
+    <code>=DESVEST(rango) =STDEV(range) 👉 Desviación estándar de una muestra</code>
+    <code>=DESVESTP(rango) =STDEVP(range) 👉 Desviación estándar de una población</code>
+    <code>=FRECUENCIA(datos; clases) =FREQUENCY(data_array, bins_array) 👉 Distribución de frecuencias entre rangos</code>
+    <code>=COEF.DE.CORREL(rango1; rango2) =CORREL(array1, array2) 👉 Devuelve el coeficiente de correlación</code>
 </div>
 
 <div class="category">
     <h2>🔍 Funciones de Búsqueda y Referencia</h2>
-    <code>=BUSCARV(...) =VLOOKUP(...) 👉 Búsqueda vertical</code>
-    <code>=BUSCARH(...) =HLOOKUP(...) 👉 Búsqueda horizontal</code>
-    <code>=COINCIDIR(...) =MATCH(...) 👉 Posición de un valor</code>
-    <code>=INDICE(...) =INDEX(...) 👉 Valor en una posición</code>
+    <code>=BUSCARV(valor_buscado; tabla; columna; [ordenado]) =VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup]) 👉 Busca un valor en la primera columna de una tabla</code>
+    <code>=BUSCARH(valor_buscado; tabla; fila; [ordenado]) =HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup]) 👉 Busca un valor en la primera fila de una tabla</code>
+    <code>=COINCIDIR(valor_buscado; rango; [tipo]) =MATCH(lookup_value, lookup_array, [match_type]) 👉 Devuelve la posición de un valor en un rango</code>
+    <code>=INDICE(matriz; fila; [columna]) =INDEX(array, row_num, [column_num]) 👉 Devuelve el valor de una celda específica dentro de una matriz</code>
 </div>
 
 <div class="category">
     <h2>🧠 Funciones Lógicas</h2>
-    <code>=SI(...) =IF(...) 👉 Condicional</code>
-    <code>=SI.ERROR(...) =IFERROR(...) 👉 Manejar errores</code>
-    <code>=Y(...) =AND(...) 👉 Todas las condiciones verdaderas</code>
-    <code>=O(...) =OR(...) 👉 Al menos una condición verdadera</code>
-    <code>=ESBLANCO(...) =ISBLANK(...) 👉 ¿Es celda vacía?</code>
-    <code>=ESERROR(...) =ISERROR(...) 👉 ¿Es error?</code>
+    <code>=SI(condición; valor_si_verdadero; valor_si_falso) =IF(logical_test, value_if_true, value_if_false) 👉 Ejecuta una acción según se cumpla o no una condición</code>
+    <code>=SI.ERROR(valor; valor_si_error) =IFERROR(value, value_if_error) 👉 Devuelve un valor si hay error, otro si no lo hay</code>
+    <code>=Y(cond1; cond2; ...) =AND(cond1, cond2, ...) 👉 Devuelve VERDADERO si todas las condiciones son verdaderas</code>
+    <code>=O(cond1; cond2; ...) =OR(cond1, cond2, ...) 👉 Devuelve VERDADERO si al menos una condición es verdadera</code>
+    <code>=ESBLANCO(valor) =ISBLANK(value) 👉 Verifica si una celda está vacía</code>
+    <code>=ESERROR(valor) =ISERROR(value) 👉 Verifica si hay un error</code>
 </div>
 
 <div class="category">
     <h2>🅰️ Funciones de Texto</h2>
-    <code>=CONCATENAR(...) =CONCATENATE(...) 👉 Unir textos</code>
-    <code>=ESPACIOS(...) =TRIM(...) 👉 Eliminar espacios extra</code>
-    <code>=IZQUIERDA(...) =LEFT(...) 👉 N primeros caracteres</code>
-    <code>=DERECHA(...) =RIGHT(...) 👉 N últimos caracteres</code>
-    <code>=EXTRAE(...) =MID(...) 👉 Extraer parte de un texto</code>
-    <code>=LARGO(...) =LEN(...) 👉 Largo de un texto</code>
-    <code>=MINUSC(...) =LOWER(...) 👉 A minúsculas</code>
-    <code>=MAYUSC(...) =UPPER(...) 👉 A mayúsculas</code>
-    <code>=NOMPROPIO(...) =PROPER(...) 👉 Capitalizar</code>
-    <code>=SUSTITUIR(...) =SUBSTITUTE(...) 👉 Reemplazo controlado</code>
-    <code>=REEMPLAZAR(...) =REPLACE(...) 👉 Reemplazo por posición</code>
-    <code>=TEXTO(...) =TEXT(...) 👉 Dar formato personalizado</code>
-    <code>=HALLAR(...) =FIND(...) 👉 Buscar posición (sensible a mayúsculas)</code>
-    <code>=ENCONTRAR(...) =SEARCH(...) 👉 Buscar posición (NO sensible)</code>
+    <code>=CONCATENAR(texto1; texto2; ...) =CONCATENATE(text1, text2, ...) 👉 Une cadenas de texto</code>
+    <code>=ESPACIOS(texto) =TRIM(text) 👉 Elimina espacios innecesarios</code>
+    <code>=IZQUIERDA(texto; num_caracteres) =LEFT(text, num_chars) 👉 Devuelve los primeros caracteres desde la izquierda</code>
+    <code>=DERECHA(texto; num_caracteres) =RIGHT(text, num_chars) 👉 Devuelve los últimos caracteres desde la derecha</code>
+    <code>=EXTRAE(texto; inicio; num_caracteres) =MID(text, start_num, num_chars) 👉 Devuelve un número específico de caracteres desde una posición</code>
+    <code>=LARGO(texto) =LEN(text) 👉 Devuelve la longitud de un texto</code>
+    <code>=MINUSC(texto) =LOWER(text) 👉 Convierte el texto a minúsculas</code>
+    <code>=MAYUSC(texto) =UPPER(text) 👉 Convierte el texto a mayúsculas</code>
+    <code>=NOMPROPIO(texto) =PROPER(text) 👉 Convierte el texto a formato título</code>
+    <code>=SUSTITUIR(texto; viejo; nuevo; [ocurrencia]) =SUBSTITUTE(text, old_text, new_text, [instance_num]) 👉 Reemplaza un texto específico</code>
+    <code>=REEMPLAZAR(texto; inicio; num; nuevo) =REPLACE(old_text, start_num, num_chars, new_text) 👉 Reemplaza parte del texto según posición</code>
+    <code>=TEXTO(valor; formato) =TEXT(value, format_text) 👉 Da formato a un número o fecha</code>
+    <code>=HALLAR(texto_buscado; texto; [inicio]) =FIND(find_text, within_text, [start_num]) 👉 Encuentra posición de texto (sensible a mayúsculas)</code>
+    <code>=ENCONTRAR(texto_buscado; texto; [inicio]) =SEARCH(find_text, within_text, [start_num]) 👉 Encuentra posición de texto (no sensible a mayúsculas)</code>
 </div>
 
 <div class="category">
     <h2>🧠 Funciones de Matrices</h2>
-    <code>=MMULT(...) =MMULT(...) 👉 Multiplicación de matrices</code>
-    <code>=MDETERM(...) =MDETERM(...) 👉 Determinante</code>
-    <code>=MINVERSA(...) =MINVERSE(...) 👉 Matriz inversa</code>
-    <code>=TRANSPONER(...) =TRANSPOSE(...) 👉 Transponer filas ↔ columnas</code>
+    <code>=MMULT(matriz1; matriz2) =MMULT(array1, array2) 👉 Multiplica dos matrices</code>
+    <code>=MDETERM(matriz) =MDETERM(array) 👉 Devuelve el determinante de una matriz</code>
+    <code>=MINVERSA(matriz) =MINVERSE(array) 👉 Devuelve la matriz inversa</code>
+    <code>=TRANSPONER(matriz) =TRANSPOSE(array) 👉 Intercambia filas por columnas</code>
 </div>
 
 <div class="category">
     <h2>📋 Funciones de Conteo y Sumatoria</h2>
-    <code>=CONTAR(...) =COUNT(...) 👉 Cuenta números</code>
-    <code>=CONTAR.SI(...) =COUNTIF(...) 👉 Cuenta según condición</code>
-    <code>=CONTARA(...) =COUNTA(...) 👉 Cuenta no vacíos</code>
-    <code>=SUMA(...) =SUM(...) 👉 Suma total</code>
-    <code>=SUMAR.SI(...) =SUMIF(...) 👉 Suma condicionada</code>
-    <code>=PROMEDIO.SI(...) =AVERAGEIF(...) 👉 Promedio condicionado</code>
+    <code>=CONTAR(rango) =COUNT(range) 👉 Cuenta cuántas celdas tienen números</code>
+    <code>=CONTAR.SI(rango; criterio) =COUNTIF(range, criteria) 👉 Cuenta celdas que cumplen una condición</code>
+    <code>=CONTARA(rango) =COUNTA(range) 👉 Cuenta celdas no vacías</code>
+    <code>=SUMA(rango) =SUM(range) 👉 Suma un conjunto de valores</code>
+    <code>=SUMAR.SI(rango; criterio; [rango_suma]) =SUMIF(range, criteria, [sum_range]) 👉 Suma celdas que cumplen una condición</code>
+    <code>=PROMEDIO.SI(rango; criterio; [rango_prom]) =AVERAGEIF(range, criteria, [average_range]) 👉 Promedia celdas que cumplen una condición</code>
 </div>
 
 <div class="category">
     <h2>💡 Otros Operadores</h2>
-    <code>^ 👉 Potenciación</code>
-    <code>& 👉 Concatenación de textos</code>
+    <code>^ 👉 Potenciación (Ej: 2^3 = 8)</code>
+    <code>& 👉 Concatenación de textos (Ej: "Hola" & " Mundo" = "Hola Mundo")</code>
 </div>
 
 </body>
