@@ -2,19 +2,24 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Índice de Enlaces</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Índice de enlaces para la materia Programación Web 71.38 - ITBA. Recursos, documentos, software y herramientas para estudiantes.">
+    <meta name="keywords" content="programación web, ITBA, JavaScript, HTML, CSS, GitHub, VS Code">
+    <meta name="author" content="Esteban Piazza">
+    <title>Índice de Enlaces - Programación Web 71.38</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
     <header>
         <h1>Índice de Enlaces</h1>
-        <button class="theme-toggle" onclick="toggleTheme()">
-            <span id="theme-icon">🌙</span>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema de color">
+            <span id="theme-icon" aria-hidden="true">🌙</span>
             <span id="theme-text">Modo Claro</span>
         </button>
     </header>
-    <main>
+    <main role="main">
         <section>
             <h2>Documentos sobre la materia</h2>
             <ul>
@@ -59,10 +64,10 @@
     <footer>
         <p>&copy; 2024 Programación Web 71.38</p>
         <div class="floating-button">
-  <a href="https://poe.com/Stev-ia-PW-bot" target="_blank">
-    <img src="planta.png" alt="Stev-ia" id="imgIA">
-  </a>
-</div>
+            <a href="https://poe.com/Stev-ia-PW-bot" target="_blank" rel="noopener noreferrer" aria-label="Acceder a Stev-ia, el bot de ayuda para Programación Web">
+                <img src="planta.png" alt="Stev-ia - Bot de ayuda" id="imgIA">
+            </a>
+        </div>
     </footer>
 
     <script>
