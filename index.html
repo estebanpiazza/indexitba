@@ -9,6 +9,10 @@
 <body>
     <header>
         <h1>Índice de Enlaces</h1>
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <span id="theme-icon">🌙</span>
+            <span id="theme-text">Modo Claro</span>
+        </button>
     </header>
     <main>
         <section>
@@ -31,6 +35,7 @@
                 <li><a href="https://git-scm.com" target="_blank">Git</a></li>
                 <li><a href="https://github.com" target="_blank">Web de GitHub</a></li>
                 <li><a href="https://docs.github.com/es/pages/quickstart" target="_blank">Tutorial Github pages</a></li>
+                <li><a href="https://codepen.io" target="_blank">CodePen</a></li>
                 <li><a href="./playground.html" target="_blank">Playground JavaScript</a></li>
                 <li><a href="./editor.html" target="_blank">Editor Web</a></li>
             </ul>
@@ -59,5 +64,46 @@
   </a>
 </div>
     </footer>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (body.getAttribute('data-theme') === 'light') {
+                body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Modo Claro';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Modo Oscuro';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (savedTheme === 'light') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Modo Oscuro';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Modo Claro';
+            }
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', loadTheme);
+    </script>
 </body>
 </html>

@@ -4,92 +4,302 @@
     <meta charset="UTF-8">
     <title>Métodos de Arrays en JavaScript</title>
     <style>
+        :root {
+            --bg-primary: #0f1419;
+            --bg-secondary: #1e2328;
+            --bg-card: #2a2d35;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8b7;
+            --accent-primary: #00d4ff;
+            --accent-secondary: #ff6b35;
+            --border-color: #3d4147;
+            --code-bg: #1a1d23;
+            --output-bg: #0a3d2b;
+            --output-border: #4ade80;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent-primary: #0ea5e9;
+            --accent-secondary: #f97316;
+            --border-color: #e2e8f0;
+            --code-bg: #f1f5f9;
+            --output-bg: #f0f9ff;
+            --output-border: #0ea5e9;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f5f5f5;
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            min-height: 100vh;
         }
 
         .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            min-height: 100vh;
+            transition: all 0.3s ease;
         }
 
-        h1 {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            color: var(--text-primary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .theme-toggle {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
         }
 
         .method-card {
-            background: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-primary);
         }
 
         .method-name {
-            color: #2c3e50;
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            font-weight: bold;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .method-name code {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            background: var(--code-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            color: var(--accent-primary);
         }
 
         .description {
-            margin-bottom: 15px;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
         .parameters {
-            background: #e9ecef;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
+            background: var(--bg-secondary);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+        }
+
+        .parameters strong {
+            color: var(--accent-secondary);
         }
 
         .example {
-            background: #1e1e1e;
-            color: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: var(--code-bg);
+            color: var(--text-primary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
             overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .example::before {
+            content: 'JavaScript';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
 
         .output {
-            background: #f1f8ff;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-top: 10px;
-            border-left: 4px solid #4CAF50;
+            background: var(--output-bg);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--output-border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .tag {
-            display: inline-block;
-            background: #3498db;
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             color: white;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 0.8em;
-            margin-right: 5px;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
         }
+
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Código syntax highlighting */
+        .example .keyword { color: #ff79c6; }
+        .example .string { color: #f1fa8c; }
+        .example .comment { color: #6272a4; }
+        .example .function { color: #50fa7b; }
+        .example .number { color: #bd93f9; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Guía Completa de Métodos de Arrays en JavaScript</h1>
+        <div class="header">
+            <h1>Guía Completa de Métodos de Arrays en JavaScript</h1>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text">Modo Claro</span>
+            </button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Buscar método..." onkeyup="searchMethods()">
+        </div>
+
+        <div class="methods-grid" id="methods-container">
 
         <div class="method-card">
             <div class="method-name">
                 <span class="tag">Transformación</span>
-                map()
+                <code>map()</code>
             </div>
             <div class="description">
                 Crea un nuevo array aplicando una función a cada elemento del array original.
@@ -120,7 +330,7 @@
         <div class="method-card">
             <div class="method-name">
                 <span class="tag">Filtrado</span>
-                filter()
+                <code>filter()</code>
             </div>
             <div class="description">
                 Crea un nuevo array con los elementos que cumplen una condición específica.
@@ -150,7 +360,7 @@
         <div class="method-card">
             <div class="method-name">
                 <span class="tag">Reducción</span>
-                reduce()
+                <code>reduce()</code>
             </div>
             <div class="description">
                 Reduce un array a un único valor (acumulando de izquierda a derecha).
@@ -194,8 +404,270 @@
 
         <div class="method-card">
             <div class="method-name">
+                <span class="tag">Búsqueda</span>
+                <code>find()</code>
+            </div>
+            <div class="description">
+                Devuelve el primer elemento que cumple con la condición especificada.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(elemento, índice, array)
+            </div>
+            <div class="example">
+                const números = [5, 12, 8, 130, 44];
+                const encontrado = números.find(n => n > 10);
+                
+                // Ejemplo más complejo
+                const usuarios = [
+                    { id: 1, nombre: 'Ana', edad: 25 },
+                    { id: 2, nombre: 'Juan', edad: 30 },
+                    { id: 3, nombre: 'María', edad: 20 }
+                ];
+                const usuario = usuarios.find(u => u.nombre === 'Juan');
+            </div>
+            <div class="output">
+                // encontrado: 12
+                // usuario: { id: 2, nombre: 'Juan', edad: 30 }
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Búsqueda</span>
+                <code>findIndex()</code>
+            </div>
+            <div class="description">
+                Devuelve el índice del primer elemento que cumple con la condición especificada.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(elemento, índice, array)
+            </div>
+            <div class="example">
+                const array = [5, 12, 8, 130, 44];
+                const índice = array.findIndex(elemento => elemento > 13);
+                
+                const productos = [
+                    { nombre: 'Laptop', precio: 1000 },
+                    { nombre: 'Mouse', precio: 20 },
+                    { nombre: 'Teclado', precio: 80 }
+                ];
+                const índiceCaros = productos.findIndex(p => p.precio > 500);
+            </div>
+            <div class="output">
+                // índice: 3 (elemento 130)
+                // índiceCaros: 0 (Laptop)
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Modificación</span>
+                <code>splice()</code>
+            </div>
+            <div class="description">
+                Modifica el array eliminando, reemplazando o agregando elementos en el lugar.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> inicio, eliminarCantidad, ...elementosAAgregar
+            </div>
+            <div class="example">
+                // Eliminar elementos
+                const frutas = ['manzana', 'banana', 'naranja', 'uva'];
+                const eliminadas = frutas.splice(1, 2); // Elimina desde índice 1, 2 elementos
+                console.log('Eliminadas:', eliminadas);
+                console.log('Array modificado:', frutas);
+                
+                // Agregar elementos
+                const colores = ['rojo', 'azul'];
+                colores.splice(1, 0, 'verde', 'amarillo'); // Agregar en índice 1
+                
+                // Reemplazar elementos
+                const números = [1, 2, 3, 4, 5];
+                números.splice(2, 2, 'nuevo1', 'nuevo2'); // Reemplazar desde índice 2
+            </div>
+            <div class="output">
+                // Eliminadas: ['banana', 'naranja']
+                // Array modificado: ['manzana', 'uva']
+                // colores: ['rojo', 'verde', 'amarillo', 'azul']
+                // números: [1, 2, 'nuevo1', 'nuevo2', 5]
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Verificación</span>
+                <code>some()</code>
+            </div>
+            <div class="description">
+                Verifica si al menos un elemento cumple con la condición especificada.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(elemento, índice, array)
+            </div>
+            <div class="example">
+                const edades = [18, 15, 22, 17];
+                const hayMayorEdad = edades.some(edad => edad >= 18);
+                
+                const tareas = [
+                    { nombre: 'Tarea 1', completada: false },
+                    { nombre: 'Tarea 2', completada: true },
+                    { nombre: 'Tarea 3', completada: false }
+                ];
+                const hayCompletada = tareas.some(t => t.completada);
+            </div>
+            <div class="output">
+                // hayMayorEdad: true
+                // hayCompletada: true
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Verificación</span>
+                <code>every()</code>
+            </div>
+            <div class="description">
+                Verifica si todos los elementos cumplen con la condición especificada.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(elemento, índice, array)
+            </div>
+            <div class="example">
+                const números = [2, 4, 6, 8];
+                const todosPares = números.every(n => n % 2 === 0);
+                
+                const usuarios = [
+                    { nombre: 'Ana', activo: true },
+                    { nombre: 'Juan', activo: true },
+                    { nombre: 'María', activo: false }
+                ];
+                const todosActivos = usuarios.every(u => u.activo);
+            </div>
+            <div class="output">
+                // todosPares: true
+                // todosActivos: false
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Búsqueda</span>
+                <code>includes()</code>
+            </div>
+            <div class="description">
+                Verifica si el array contiene un elemento específico.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> valorBuscado, índiceInicio (opcional)
+            </div>
+            <div class="example">
+                const frutas = ['manzana', 'banana', 'naranja'];
+                const tieneBanana = frutas.includes('banana');
+                const tieneUva = frutas.includes('uva');
+                
+                // Con índice de inicio
+                const números = [1, 2, 3, 2, 1];
+                const tiene2DespuesDelTercero = números.includes(2, 3);
+            </div>
+            <div class="output">
+                // tieneBanana: true
+                // tieneUva: false
+                // tiene2DespuesDelTercero: true
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Búsqueda</span>
+                <code>indexOf()</code>
+            </div>
+            <div class="description">
+                Devuelve el primer índice donde se encuentra el elemento especificado.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> valorBuscado, índiceInicio (opcional)
+            </div>
+            <div class="example">
+                const animales = ['gato', 'perro', 'pájaro', 'perro'];
+                const índicePerro = animales.indexOf('perro');
+                const índiceNoExiste = animales.indexOf('pez');
+                
+                // Buscar desde un índice específico
+                const segundoPerro = animales.indexOf('perro', 2);
+            </div>
+            <div class="output">
+                // índicePerro: 1
+                // índiceNoExiste: -1
+                // segundoPerro: 3
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Búsqueda</span>
+                <code>lastIndexOf()</code>
+            </div>
+            <div class="description">
+                Devuelve el último índice donde se encuentra el elemento especificado.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> valorBuscado, índiceInicio (opcional)
+            </div>
+            <div class="example">
+                const números = [2, 5, 9, 2];
+                const últimoÍndice2 = números.lastIndexOf(2);
+                const últimoÍndice7 = números.lastIndexOf(7);
+                
+                // Buscar hacia atrás desde un índice específico
+                const buscarHacia = números.lastIndexOf(2, 2);
+            </div>
+            <div class="output">
+                // últimoÍndice2: 3
+                // últimoÍndice7: -1
+                // buscarHacia: 0
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
+                <span class="tag">Iteración</span>
+                <code>forEach()</code>
+            </div>
+            <div class="description">
+                Ejecuta una función para cada elemento del array.
+            </div>
+            <div class="parameters">
+                <strong>Parámetros:</strong> callback(elemento, índice, array)
+            </div>
+            <div class="example">
+                const frutas = ['manzana', 'banana', 'naranja'];
+                
+                // Imprimir cada fruta
+                frutas.forEach((fruta, índice) => {
+                    console.log(`${índice + 1}: ${fruta}`);
+                });
+                
+                // Ejemplo más complejo
+                const productos = [
+                    { nombre: 'Laptop', precio: 1000 },
+                    { nombre: 'Mouse', precio: 20 }
+                ];
+                
+                productos.forEach(producto => {
+                    producto.precioConDescuento = producto.precio * 0.9;
+                });
+            </div>
+            <div class="output">
+                // 1: manzana
+                // 2: banana
+                // 3: naranja
+            </div>
+        </div>
+
+        <div class="method-card">
+            <div class="method-name">
                 <span class="tag">Nuevo</span>
-                at()
+                <code>at()</code>
             </div>
             <div class="description">
                 Devuelve el elemento en el índice especificado, permitiendo índices negativos.
@@ -220,7 +692,7 @@
         <div class="method-card">
             <div class="method-name">
                 <span class="tag">Búsqueda</span>
-                findLast()
+                <code>findLast()</code>
             </div>
             <div class="description">
                 Devuelve el último elemento que cumple con la condición especificada.
@@ -249,7 +721,7 @@
         <div class="method-card">
             <div class="method-name">
                 <span class="tag">Nuevo</span>
-                toSorted()
+                <code>toSorted()</code>
             </div>
             <div class="description">
                 Devuelve un nuevo array con los elementos ordenados (versión no mutante de sort()).
@@ -283,7 +755,7 @@
         <div class="method-card">
             <div class="method-name">
                 <span class="tag">Nuevo</span>
-                toReversed()
+                <code>toReversed()</code>
             </div>
             <div class="description">
                 Devuelve un nuevo array con los elementos en orden inverso (versión no mutante de reverse()).
@@ -308,7 +780,7 @@
         <div class="method-card">
             <div class="method-name">
                 <span class="tag">Búsqueda</span>
-                group() [Stage 3]
+                <code>group() [Stage 3]</code>
             </div>
             <div class="description">
                 Agrupa los elementos del array según una función de clasificación.
@@ -344,5 +816,89 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (body.getAttribute('data-theme') === 'light') {
+                body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Modo Claro';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Modo Oscuro';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (savedTheme === 'light') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Modo Oscuro';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Modo Claro';
+            }
+        }
+
+        // Search functionality
+        function searchMethods() {
+            const searchTerm = document.querySelector('.search-input').value.toLowerCase();
+            const methodCards = document.querySelectorAll('.method-card');
+            
+            methodCards.forEach(card => {
+                const methodName = card.querySelector('.method-name code').textContent.toLowerCase();
+                const description = card.querySelector('.description').textContent.toLowerCase();
+                const tag = card.querySelector('.tag').textContent.toLowerCase();
+                
+                const matches = methodName.includes(searchTerm) || 
+                               description.includes(searchTerm) || 
+                               tag.includes(searchTerm);
+                
+                if (matches || searchTerm === '') {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.3s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Add fade-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', loadTheme);
+
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
