@@ -1,0 +1,41 @@
+Comisión Lunes	Comisión Jueves	Semana	Módulo	Clase	Temas	Entregable	Notas
+		1	A	1	Intro: pensamiento computacional, modelo cliente-servidor, full-stack; GitHub setup; control de versiones (ramas, commits, convenciones)	—	Cuenta GitHub activa
+		2	A	2	CI/CD: pipeline básico, variables de entorno, secretos, checks automáticos; preview por PR; monitoreo de builds	E1: Repo + pipeline + preview	Vercel o similar
+		3	B	3	HTML semántico: estructura base (header, nav, main, section, article, footer); formularios; accesibilidad esencial (ARIA, roles)	—	Proyecto del e-commerce inicia
+		4	B	4	CSS completo: box model, flexbox, grid, responsive mobile-first, tipografía, componentes reutilizables, guía de diseño	E2: Landing + vistas clave responsivas	Figma + CSS variables
+		5	C	5	JavaScript moderno: variables/const, tipos, funciones (flecha, expresada), destructuring, async-await, fetch; módulos (import/export)	—	Code runner / tests unitarios
+		6	C	6	DOM avanzado: selección (query, queryAll), eventos (listeners, delegación), validación de formularios, render dinámico, llamadas HTTP	E3: Formularios dinámicos con fetch + validación	Muy importante: eventos
+		7	D	7	React: componentes funcionales, props, useState, useEffect, formularios controlados, manejo básico de estado	—	Create-react-app o Vite
+		8	D	8	Next.js: rutas (App Router), data-fetching (SSR/SSG), metadata, layouts, organización por features; primeras páginas del catálogo	—	Inicio del proyecto integrador
+		1er Parcial	—	—	HTML semántico + JavaScript (hasta S6) + CSS responsivo	—	Evaluación teórico-práctica
+		9	D	9	API interna (route handlers en Next), validación de datos; catálogo y carrito en memoria (provisorio); páginas protegidas con rutas	E4: Catálogo navegable + API básica	Template de checklist en PRs
+		10	E	10	Supabase: modelado relacional (users, profiles, products, orders, order_items); SQL directo; migraciones y seed; RLS policies; autenticación	—	Diseño de BD crítico
+		11	E	11	Integración Next ↔ Supabase: Supabase client, consultas (SELECT/INSERT/UPDATE), operaciones CRUD; protección servidor; user context	—	Época de consultas
+		12	E	12	Integración completa: catálogo + carrito + órdenes persistentes; panel básico administración (productos/pedidos); flujo usuario → orden	E5: CRUD funcional en Supabase + admin	Demostración en vivo
+		13	F	13	Mercado Pago sandbox: integración SDK, checkout de prueba, estados de pago (pending/approved/failed), actualización de órdenes	—	Test con dinero ficticio
+		14	F	14	Webhooks: endpoint seguro, verificación de firma, conciliación de estados, actualización de stock; manejo de reintentos	—	Ngrok para testing local
+		15	F	15	Flujo E2E: compra completa, casos edge (stock, fallos, timeouts), logs y monitoreo; últimos ajustes de calidad	E6: Checkout + webhook funcionales	Pruebas exhaustivas
+		16	—	16	Demo pública final, revisión técnica, documentación, retro de equipo y entrega	Demo + Documentación	Evaluación integral
+							
+Desglose de Entregas (Ponderación)							
+Entregable		Semana	%	Criterios			
+E1		2	10%	Repo operativo, pipeline CI/CD, preview por PR			
+E2		4	15%	Maquetado semántico, responsive, accesible			
+E3		6	15%	DOM dinámico, validación, fetch integrado			
+E4		9	20%	Catálogo + API interna, lógica funcional			
+E5		12	20%	BD modelada, CRUD completo, persistencia			
+E6		15–16	20%	Pagos + webhooks, demo operativa			
+							
+Criterios transversales: Funcionalidad (40%) | Código/estructura (20%) | Interfaz/Accesibilidad (15%) | Despliegue (15%) | Documentación (10%)							
+							
+Notas Pedagógicas							
+Metodología: Clases teórico-prácticas, proyecto continuo, reviews de código en cada PR							
+Recuperatorio: Semana 17 disponible si es necesario							
+Demo: Pública, en vivo, con Q&A técnico							
+Recursos Sugeridos							
+CI/CD: Vercel, GitHub Actions, Netlify							
+Frontend: Next.js, React, TailwindCSS							
+BD: Supabase (PostgreSQL + Auth + Real-time)							
+Pagos: Mercado Pago API (sandbox)							
+Testing: Jest, Testing Library							
+Documentación: README con setup, diagrama de BD, API docs							
