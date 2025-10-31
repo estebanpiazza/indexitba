@@ -69,90 +69,124 @@
     <h2>Recuerde que debe obtener EXCELENTE en los 5 items, en caso contrario, el trabajo estará desaprobado.</h2>
 
         <div class="consigna">
-        <h2>Consigna del Trabajo Práctico</h2>
+        <h2>Consigna y Criterios de Evaluación</h2>
         <p>
-            El objetivo de este trabajo práctico es desarrollar una aplicación web funcional que integre HTML semántico, 
-            CSS con diseño responsive y JavaScript para gestionar funcionalidades dinámicas. 
+            El objetivo del proyecto es desarrollar una aplicación web full-stack siguiendo el cronograma y entregables del curso PW 2026 Q1. El trabajo se evalúa por entregables (E1 a E6) y criterios transversales, con rúbrica y ponderaciones claras.
         </p>
         <ul>
-            <li> El sitio web pueder ser una página para una marca o negocio, debe tener una landing page donde se mostrar información del mismo. En ese caso, se deberán crear todas las páginas necesarias para poder indetificar una marca. </li>
-            <li>Debe haber una <strong>vista optimizada para desktop</strong> y una <strong>vista específica para dispositivos móviles</strong>.</li>
-            <li>El <strong>JavaScript debe manejar un CRUD completo</strong> (crear, leer, actualizar y eliminar datos).</li>
-            <li>El funcionamiento del sitio debe ser real y verificable: <strong>se valora que el código funcione, no las intenciones</strong>.</li>
-            <li>Sin embargo, se revisa el código para <strong>detectar buenas prácticas</strong>, orden, semántica y reutilización.</li>
-            <li>El <strong>repositorio en GitHub y la página desplegada</strong> deben estar correctamente configurados y accesibles.</li>
-            <li>El <strong>plantel docente puede convocar a una defensa oral o escrita</strong> por cualquier motivo si lo considera necesario.</li>
+            <li>Debes cumplir con los <strong>entregables</strong> del cronograma: CI/CD, landing semántica y responsive, formularios dinámicos, catálogo y API, integración con base de datos y pagos, y demo final.</li>
+            <li>La evaluación incluye: <strong>Funcionalidad, Código/Estructura, Interfaz/Accesibilidad, Despliegue y Documentación</strong>, según la rúbrica.</li>
+            <li>El desarrollo debe ser <strong>continuo</strong>, con commits y entregas alineadas a las fechas y etapas del cronograma.</li>
+            <li>Se valoran buenas prácticas: código limpio, modular, accesible, documentación clara y despliegue público.</li>
+            <li>La <strong>defensa técnica</strong> y la demo pública forman parte de la evaluación final.</li>
+            <li>Recuerda que la rúbrica define los niveles de logro para cada entregable y criterio transversal, y la ponderación de cada uno.</li>
         </ul>
+        <p style="margin-top:10px;font-size:0.98em;color:#555;">
+            <strong>Metodología:</strong> Clases teórico-prácticas, proyecto continuo, revisiones de código en cada PR, y recursos sugeridos como Vercel, Next.js, Supabase y Mercado Pago API.<br>
+            <strong>Recuperatorio:</strong> Semana 17 disponible si es necesario. <strong>Demo:</strong> Pública, en vivo, con Q&A técnico.
+        </p>
     </div>
 
     
     <table>
         <thead>
             <tr>
-                <th>Criterio</th>
+                <th>Entregable / Criterio</th>
                 <th>Insuficiente (1)</th>
                 <th>Regular (2)</th>
                 <th>Bueno (3)</th>
                 <th>Excelente (4)</th>
+                <th>Ponderación</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>HTML</td>
-                <td>Estructura básica incorrecta; etiquetas esenciales no aplicadas adecuadamente.</td>
-                <td>HTML con estructura básica y etiquetas principales, pero sin jerarquía o uso de semántica.</td>
-                <td>HTML estructurado con jerarquía clara; etiquetas semánticas básicas aplicadas correctamente.</td>
-                <td>HTML bien organizado y semántico, con estructura clara y optimización del código.</td>
+                <td>E1: Repo + pipeline + preview</td>
+                <td>No hay repositorio operativo ni pipeline funcional.</td>
+                <td>Repositorio creado pero sin CI/CD o preview funcional.</td>
+                <td>Repo y pipeline funcionales, preview parcial o con errores.</td>
+                <td>Repo operativo, pipeline CI/CD y preview por PR funcionando correctamente.</td>
+                <td>10%</td>
             </tr>
             <tr>
-                <td>CSS</td>
-                <td>Estilos desorganizados; sin diseño estructurado ni uso adecuado de propiedades.</td>
-                <td>Estilos básicos con diseño funcional, pero falta de estructura o consistencia.</td>
-                <td>CSS organizado con un diseño responsive para dispositivos móviles y de escritorio.</td>
-                <td>CSS optimizado con diseño avanzado y responsivo, usando Flexbox o Grid según necesidad.</td>
+                <td>E2: Landing + vistas clave responsivas</td>
+                <td>Landing incompleta, sin maquetado semántico ni responsive.</td>
+                <td>Landing básica, maquetado poco semántico o sin accesibilidad.</td>
+                <td>Landing semántica, responsive y accesible, pero con detalles a mejorar.</td>
+                <td>Maquetado semántico, responsive, accesible y visualmente consistente.</td>
+                <td>15%</td>
             </tr>
             <tr>
-                <td>JavaScript</td>
-                <td>Falta de interactividad o funciones básicas; código sin estructura.</td>
-                <td>Funciones básicas y mínima interactividad, pero sin modularidad o reutilización de código.</td>
-                <td>Código organizado, con funciones reutilizables y buenas prácticas, pero sin estructura avanzada.</td>
-                <td>Código modular y bien organizado, con un manejo óptimo de lógica y funcionalidades CRUD completas.</td>
+                <td>E3: Formularios dinámicos con fetch + validación</td>
+                <td>No hay formularios dinámicos ni validación ni fetch.</td>
+                <td>Formularios básicos, validación mínima o fetch incompleto.</td>
+                <td>Formularios dinámicos, validación y fetch integrados, pero con fallos menores.</td>
+                <td>DOM dinámico, validación robusta y fetch integrado correctamente.</td>
+                <td>15%</td>
             </tr>
             <tr>
-                <td>Responsividad</td>
-                <td>No hay adaptación a dispositivos móviles o de escritorio.</td>
-                <td>Adaptación parcial; problemas de visualización en dispositivos móviles o de escritorio.</td>
-                <td>Diseño responsivo que se adapta a dispositivos móviles y de escritorio con algunos ajustes necesarios.</td>
-                <td>Diseño completamente adaptado y optimizado para dispositivos móviles y de escritorio sin problemas de visualización.</td>
+                <td>E4: Catálogo navegable + API básica</td>
+                <td>No hay catálogo ni API interna funcional.</td>
+                <td>Catálogo básico, API incompleta o sin lógica funcional.</td>
+                <td>Catálogo navegable y API funcional, pero con lógica mejorable.</td>
+                <td>Catálogo + API interna, lógica funcional y checklist en PRs.</td>
+                <td>20%</td>
             </tr>
             <tr>
-                <td>Usabilidad</td>
-                <td>Navegación confusa, diseño desorganizado y falta de coherencia visual.</td>
-                <td>Navegación funcional pero no intuitiva; diseño básico y limitado en usabilidad.</td>
-                <td>Navegación clara y lógica; diseño visual con coherencia y buena experiencia de usuario.</td>
-                <td>Navegación altamente intuitiva y eficiente, con un diseño visual atractivo que facilita la usabilidad.</td>
+                <td>E5: CRUD funcional en Supabase + admin</td>
+                <td>BD no modelada, sin CRUD ni persistencia.</td>
+                <td>BD modelada, CRUD parcial o sin persistencia real.</td>
+                <td>CRUD funcional, persistencia y panel admin básico.</td>
+                <td>BD modelada, CRUD completo, persistencia y admin funcional.</td>
+                <td>20%</td>
             </tr>
             <tr>
-            <td>Condiciones de entrega</td>
-                       <td>
-                No se puede acceder al repositorio de GitHub o a la página en producción. 
-                Las fechas de los commits son inexistentes o no cumplen con las pautas mínimas de entrega.
-            </td> 
-                            <td>
-                El repositorio de GitHub está disponible, pero la página en producción no es accesible, o viceversa. 
-                Además, las fechas de los commits no son consistentes o no cumplen con las pautas.
-            </td>
-                            <td>
-                Se puede acceder al repositorio de GitHub y a la página en producción, pero las fechas de los commits 
-                no corresponden a un desarrollo continuo o presentan inconsistencias.
-            </td>
-            <td>
-                Se puede acceder al repositorio de GitHub y a la página en producción (GitHub Pages o Vercel). 
-                Las fechas de los commits reflejan un proceso de desarrollo continuo y alineado a las pautas establecidas.
-            </td>
-
-
-
+                <td>E6: Checkout + webhook funcionales</td>
+                <td>No hay integración de pagos ni webhooks ni demo.</td>
+                <td>Pagos o webhooks integrados parcialmente, demo incompleta.</td>
+                <td>Pagos y webhooks funcionales, demo operativa con detalles a mejorar.</td>
+                <td>Pagos + webhooks, demo operativa y pruebas exhaustivas.</td>
+                <td>20%</td>
+            </tr>
+            <tr>
+                <td>Funcionalidad (transversal)</td>
+                <td>La app no cumple los objetivos mínimos ni es funcional.</td>
+                <td>Funcionalidad parcial, errores frecuentes o flujos incompletos.</td>
+                <td>Funcionalidad mayormente completa, con detalles menores.</td>
+                <td>Funcionalidad completa, robusta y alineada a los objetivos.</td>
+                <td>40%*</td>
+            </tr>
+            <tr>
+                <td>Código / Estructura</td>
+                <td>Código desorganizado, sin estructura ni buenas prácticas.</td>
+                <td>Estructura básica, pero con problemas de organización o legibilidad.</td>
+                <td>Código organizado, legible y con buenas prácticas, pero mejorable.</td>
+                <td>Código limpio, modular, estructurado y siguiendo buenas prácticas.</td>
+                <td>20%*</td>
+            </tr>
+            <tr>
+                <td>Interfaz / Accesibilidad</td>
+                <td>Interfaz poco usable, sin accesibilidad ni coherencia visual.</td>
+                <td>Interfaz básica, accesibilidad mínima o visual poco consistente.</td>
+                <td>Interfaz usable, accesible y visualmente coherente, con detalles a mejorar.</td>
+                <td>Interfaz intuitiva, accesible y visualmente atractiva.</td>
+                <td>15%*</td>
+            </tr>
+            <tr>
+                <td>Despliegue</td>
+                <td>No hay despliegue ni acceso público al proyecto.</td>
+                <td>Despliegue parcial, acceso limitado o con errores.</td>
+                <td>Despliegue funcional, pero con detalles a mejorar.</td>
+                <td>Despliegue público, estable y accesible (Vercel, GitHub Pages, etc.).</td>
+                <td>15%*</td>
+            </tr>
+            <tr>
+                <td>Documentación</td>
+                <td>No hay documentación o es insuficiente.</td>
+                <td>Documentación básica, incompleta o desactualizada.</td>
+                <td>Documentación clara y suficiente, pero mejorable.</td>
+                <td>Documentación completa, clara y alineada al proyecto.</td>
+                <td>10%*</td>
             </tr>
         </tbody>
     </table>
