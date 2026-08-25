@@ -2,10 +2,12 @@ create-pages:
   image: alpine:3.22
   stage: deploy
   script:
-    - mkdir .public
-    - cp -r -- ./* .public/
-    - mv .public public
-  pages: true
+    - rm -rf pages-dist
+    - mkdir .pages-dist
+    - cp -r -- ./* .pages-dist/
+    - mv .pages-dist pages-dist
+  pages:
+    publish: pages-dist
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
   environment: production
