@@ -1,14 +1,16 @@
 * { box-sizing: border-box; }
 body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background: #1e1e1e; color: #eee; display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
 [hidden] { display: none !important; }
-.workspace-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px; background: #252525; border-bottom: 1px solid #555; font-size: 13px; }
-.workspace-toolbar label { display: inline-flex; align-items: center; gap: 5px; }
-#run { background: #71ddae; color: #10261c; border-color: #71ddae; font-size: 16px; font-weight: 800; padding: 10px 24px; }
-#run:hover { background: #a0edcc; }
-#run-status { color: #b8c6d1; }
-.panel-toggles { display: flex; flex-wrap: wrap; gap: 10px; border: 1px solid #666; border-radius: 5px; padding: 6px 10px; margin: 0; }
-.panel-toggles legend { padding: 0 4px; color: #bbb; }
-.width-control input { width: 100px; }
+.workspace-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px; padding: 6px 8px; background: #252525; border-bottom: 1px solid #383838; font-size: 12px; line-height: 1.4; }
+.workspace-toolbar label { display: inline-flex; align-items: center; gap: 4px; }
+.workspace-toolbar input[type="checkbox"] { margin: 0; }
+.workspace-toolbar button { font-size: 12px; padding: 4px 8px; }
+#run { background: #293b32; color: #b6dfc8; border-color: #4a6757; font-size: 12px; font-weight: 600; padding: 4px 10px; }
+#run:hover { background: #354c40; }
+#run-status, #save-status { color: #aaa; font-size: 11px; }
+.panel-toggles { display: flex; flex-wrap: wrap; gap: 8px; border: 0; border-left: 1px solid #494949; padding: 2px 0 2px 10px; margin: 0; min-width: 0; }
+.panel-toggles legend { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.width-control input { width: 70px; margin: 0; }
 .container { display: grid; grid-template-columns: minmax(0, var(--code-width, 50fr)) minmax(0, var(--output-width, 50fr)); flex: 1; min-height: 0; gap: 4px; }
 .container.single-column { grid-template-columns: minmax(0, 1fr); }
 .editors { display: flex; flex-direction: column; gap: 4px; background: #2d2d2d; padding: 4px; min-height: 0; min-width: 0; }
