@@ -24,6 +24,10 @@ body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background:
 .editor-header { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; padding: 6px 8px; border-bottom: 1px solid #383838; font-size: 14px; }
 .editor-header small { color: #aaa; font-size: 11px; margin-left: 12px; }
 .CodeMirror { flex: 1; min-height: 0; width: 100%; font: 14px/1.5 Consolas, Monaco, monospace; }
+.error-gutter { width: 14px; }
+.error-marker { color: #ffaaa4; font-weight: bold; text-align: center; }
+.CodeMirror .error-line { background: rgba(255, 95, 95, 0.12); }
+.error-lens { padding: 2px 8px; color: #ffaaa4; background: #382322; border-left: 2px solid #ff8787; font: 12px/1.5 Consolas, Monaco, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
 .output { display: flex; flex-direction: column; min-height: 0; min-width: 0; gap: 4px; padding: 4px 4px 4px 0; }
 .preview, .console { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
 .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; justify-content: space-between; padding: 6px 8px; background: #2d2d2d; font-size: 14px; }

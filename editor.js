@@ -3,6 +3,7 @@ const editors = ['html', 'css', 'js'].map((language, index) => {
         mode: ['text/html', 'text/css', 'text/javascript'][index],
         theme: 'material-darker',
         lineNumbers: true,
+        gutters: index === 2 ? ['CodeMirror-linenumbers', 'error-gutter'] : ['CodeMirror-linenumbers'],
         indentUnit: 2,
         tabSize: 2,
         lineWrapping: true,
@@ -23,6 +24,55 @@ const runStatus = document.getElementById('run-status');
 let pendingChanges = false;
 const draftKey = 'indexitba.editor.draft.v1';
 const saveStatus = document.getElementById('save-status');
+const jsEditor = editors[2];
+let diagnostic = null;
+let syntaxTimer;
+let executedJavaScript = null;
+
+function clearDiagnostic() {
+    if (!diagnostic) return;
+    jsEditor.operation(() => {
+        diagnostic.widget.clear();
+        jsEditor.removeLineClass(diagnostic.line, 'background', 'error-line');
+        jsEditor.clearGutter('error-gutter');
+    });
+    diagnostic = null;
+}
+
+function showDiagnostic(line, column, message, kind) {
+    clearDiagnostic();
+    if (!Number.isInteger(line) || line < 1 || line > jsEditor.lineCount()) return;
+    const lineIndex = line - 1;
+    const node = document.createElement('div');
+    node.className = 'error-lens';
+    node.setAttribute('role', 'status');
+    node.textContent = `${kind} · Línea ${line}, columna ${column}: ${message}`;
+    const marker = document.createElement('div');
+    marker.className = 'error-marker';
+    marker.textContent = '!';
+    marker.title = node.textContent;
+    jsEditor.operation(() => {
+        const handle = jsEditor.addLineClass(lineIndex, 'background', 'error-line');
+        jsEditor.setGutterMarker(lineIndex, 'error-gutter', marker);
+        diagnostic = {
+            line: handle,
+            widget: jsEditor.addLineWidget(lineIndex, node, { coverGutter: false, noHScroll: true })
+        };
+    });
+}
+
+function checkSyntax() {
+    clearTimeout(syntaxTimer);
+    clearDiagnostic();
+    try {
+        acorn.parse(jsEditor.getValue(), { ecmaVersion: 'latest', sourceType: 'script' });
+    } catch (error) {
+        if (error.loc) {
+            showDiagnostic(error.loc.line, error.loc.column + 1,
+                error.message.replace(/ \(\d+:\d+\)$/, ''), 'Error de sintaxis');
+        }
+    }
+}
 
 function saveDraft() {
     try {
@@ -76,11 +126,11 @@ function connectConsole(run) {
             seen.delete(value);
         }
     }
-    function send(level, args) {
+    function send(level, args, location) {
         const text = args.map(value => {
             try { return format(value); } catch { return '[No se pudo mostrar el valor]'; }
         }).join(' ').slice(0, 20000);
-        parent.postMessage({ source: 'editor-console', run, level, text }, '*');
+        parent.postMessage({ source: 'editor-console', run, level, text, location }, '*');
     }
     for (const level of ['log', 'info', 'warn', 'error', 'debug', 'table']) {
         const original = console[level].bind(console);
@@ -89,10 +139,16 @@ function connectConsole(run) {
     const originalClear = console.clear.bind(console);
     console.clear = () => { send('clear', []); originalClear(); };
     window.addEventListener('error', event => {
-        send('error', [event.error || event.message || 'No se pudo cargar un recurso.']);
+        const location = event.filename === `indexitba-user-${run}.js`
+            ? { line: event.lineno, column: event.colno, message: event.message } : undefined;
+        send('error', [event.error || event.message || 'No se pudo cargar un recurso.'], location);
     });
     window.addEventListener('unhandledrejection', event => {
-        send('error', ['Promesa rechazada:', event.reason]);
+        const match = typeof event.reason?.stack === 'string'
+            ? event.reason.stack.match(new RegExp(`indexitba-user-${run}\\.js:(\\d+):(\\d+)`)) : null;
+        const location = match ? { line: Number(match[1]), column: Number(match[2]),
+            message: String(event.reason) } : undefined;
+        send('error', ['Promesa rechazada:', event.reason], location);
     });
 }
 
@@ -103,6 +159,11 @@ window.addEventListener('message', event => {
     if (data.level === 'clear') return clearConsole();
     if (!['log', 'info', 'warn', 'error', 'debug', 'table'].includes(data.level) ||
         typeof data.text !== 'string') return;
+    if (data.level === 'error' && data.location && jsEditor.getValue() === executedJavaScript &&
+        Number.isInteger(data.location.line) && Number.isInteger(data.location.column) &&
+        typeof data.location.message === 'string' && !diagnostic) {
+        showDiagnostic(data.location.line, data.location.column, data.location.message, 'Error al ejecutar');
+    }
     const entry = document.createElement('pre');
     entry.className = `console-entry ${data.level}`;
     entry.textContent = `[${data.level}] ${data.text}`;
@@ -116,8 +177,10 @@ function updatePreview() {
     clearConsole();
     const run = ++currentRun;
     const [html, css, js] = editors.map(editor => editor.getValue());
+    checkSyntax();
+    executedJavaScript = js;
     // Literal closing script tags in user code must not break the bridge.
-    const scriptText = JSON.stringify(js).replace(/</g, '\\u003c');
+    const scriptText = JSON.stringify(`${js}\n//# sourceURL=indexitba-user-${run}.js`).replace(/</g, '\\u003c');
     previewFrame.srcdoc = `<!DOCTYPE html><html><head><meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script>(${connectConsole.toString()})(${run});<\/script>
@@ -143,6 +206,13 @@ function schedulePreview() {
 }
 // Restore before subscribing, so loading a draft never overwrites it with partial values.
 const restoredDraft = restoreDraft();
+checkSyntax();
+jsEditor.on('change', () => {
+    executedJavaScript = null;
+    clearDiagnostic();
+    clearTimeout(syntaxTimer);
+    syntaxTimer = setTimeout(checkSyntax, 300);
+});
 editors.forEach(editor => editor.on('change', () => {
     // Save synchronously: even an immediate refresh must retain the latest edit.
     saveDraft();
