@@ -18,6 +18,9 @@ const previewFrame = document.getElementById('preview-frame');
 const consoleOutput = document.getElementById('console-output');
 let currentRun = 0;
 let updateTimer;
+const autoRun = document.getElementById('auto-run');
+const runStatus = document.getElementById('run-status');
+let pendingChanges = false;
 
 function clearConsole() {
     consoleOutput.replaceChildren();
@@ -86,17 +89,107 @@ function updatePreview() {
     // Literal closing script tags in user code must not break the bridge.
     const scriptText = JSON.stringify(js).replace(/</g, '\\u003c');
     previewFrame.srcdoc = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script>(${connectConsole.toString()})(${run});<\/script>
         <style>${css}</style></head><body>${html}
         <script>{ const userScript = document.createElement('script');
         userScript.textContent = ${scriptText};
         document.body.appendChild(userScript); }<\/script></body></html>`;
+    pendingChanges = false;
+    runStatus.textContent = 'Ejecutado';
 }
 
-editors.forEach(editor => editor.on('change', () => {
+function schedulePreview() {
     clearTimeout(updateTimer);
-    updateTimer = setTimeout(updatePreview, 350);
+    if (!autoRun.checked || !pendingChanges) return;
+    updateTimer = setTimeout(() => {
+        // Keep form values and focus intact while the user interacts with the preview.
+        if (document.activeElement === previewFrame) {
+            runStatus.textContent = 'Cambios pendientes · presioná Run para aplicarlos';
+            return;
+        }
+        updatePreview();
+    }, 700);
+}
+editors.forEach(editor => editor.on('change', () => {
+    pendingChanges = true;
+    runStatus.textContent = 'Cambios sin ejecutar';
+    schedulePreview();
 }));
+autoRun.addEventListener('change', schedulePreview);
 document.getElementById('run').addEventListener('click', updatePreview);
 document.getElementById('clear-console').addEventListener('click', clearConsole);
+document.addEventListener('keydown', event => {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+        event.preventDefault();
+        updatePreview();
+    }
+});
+
+const panels = [...document.querySelectorAll('[data-label]')];
+const toggles = [...document.querySelectorAll('[data-panel]')];
+const layout = document.querySelector('.container');
+function refreshLayout() {
+    const codeVisible = panels.slice(0, 3).some(panel => !panel.hidden);
+    const outputVisible = panels.slice(3).some(panel => !panel.hidden);
+    document.querySelector('.editors').hidden = !codeVisible;
+    document.querySelector('.output').hidden = !outputVisible;
+    layout.classList.toggle('single-column', !codeVisible || !outputVisible);
+    document.querySelector('.empty-layout').hidden = codeVisible || outputVisible;
+    requestAnimationFrame(() => editors.forEach(editor => editor.refresh()));
+}
+toggles.forEach(toggle => toggle.addEventListener('change', () => {
+    document.getElementById(toggle.dataset.panel).hidden = !toggle.checked;
+    refreshLayout();
+}));
+panels.forEach(panel => {
+    const actions = document.createElement('span');
+    actions.className = 'panel-actions';
+    const shrink = document.createElement('button');
+    shrink.type = 'button';
+    shrink.textContent = 'Achicar';
+    shrink.setAttribute('aria-label', `Achicar ${panel.dataset.label}`);
+    shrink.setAttribute('aria-pressed', 'false');
+    shrink.addEventListener('click', () => {
+        const compact = panel.classList.toggle('compact');
+        shrink.textContent = compact ? 'Ampliar' : 'Achicar';
+        shrink.setAttribute('aria-label', `${compact ? 'Ampliar' : 'Achicar'} ${panel.dataset.label}`);
+        shrink.setAttribute('aria-pressed', String(compact));
+        refreshLayout();
+    });
+    const hide = document.createElement('button');
+    hide.type = 'button';
+    hide.textContent = 'Ocultar';
+    hide.setAttribute('aria-label', `Ocultar ${panel.dataset.label}`);
+    hide.addEventListener('click', () => {
+        const toggle = toggles.find(input => input.dataset.panel === panel.id);
+        toggle.checked = false;
+        panel.hidden = true;
+        toggle.focus();
+        refreshLayout();
+    });
+    actions.append(shrink, hide);
+    panel.querySelector('.editor-header, .toolbar').append(actions);
+});
+const codeWidth = document.getElementById('code-width');
+codeWidth.addEventListener('input', () => {
+    layout.style.setProperty('--code-width', `${codeWidth.value}fr`);
+    layout.style.setProperty('--output-width', `${100 - codeWidth.value}fr`);
+    refreshLayout();
+});
+document.getElementById('reset-layout').addEventListener('click', () => {
+    toggles.forEach(toggle => { toggle.checked = true; });
+    panels.forEach(panel => {
+        panel.hidden = false;
+        panel.classList.remove('compact');
+        const shrink = panel.querySelector('.panel-actions button');
+        shrink.textContent = 'Achicar';
+        shrink.setAttribute('aria-label', `Achicar ${panel.dataset.label}`);
+        shrink.setAttribute('aria-pressed', 'false');
+    });
+    codeWidth.value = 50;
+    layout.style.removeProperty('--code-width');
+    layout.style.removeProperty('--output-width');
+    refreshLayout();
+});
 updatePreview();

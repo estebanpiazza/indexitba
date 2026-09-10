@@ -9,32 +9,48 @@
     <link rel="stylesheet" href="editor.css">
 </head>
 <body>
+    <header class="workspace-toolbar">
+        <button id="run" type="button" title="Ejecutar (Ctrl+Enter o Cmd+Enter)">▶ Run</button>
+        <label><input id="auto-run" type="checkbox"> Actualizar automáticamente</label>
+        <span id="run-status" role="status">Listo para ejecutar</span>
+        <fieldset class="panel-toggles">
+            <legend>Mostrar secciones</legend>
+            <label><input type="checkbox" data-panel="html-panel" checked> HTML</label>
+            <label><input type="checkbox" data-panel="css-panel" checked> CSS</label>
+            <label><input type="checkbox" data-panel="js-panel" checked> JavaScript</label>
+            <label><input type="checkbox" data-panel="preview-panel" checked> Vista previa</label>
+            <label><input type="checkbox" data-panel="console-panel" checked> Consola</label>
+        </fieldset>
+        <label class="width-control">Ancho del código <input id="code-width" type="range" min="25" max="75" value="50" aria-label="Ancho del código en porcentaje"></label>
+        <button id="reset-layout" type="button">Restaurar paneles</button>
+    </header>
     <div class="container">
         <div class="editors">
-            <div class="editor-container">
+            <div class="editor-container" id="html-panel" data-label="HTML">
                 <div class="editor-header">HTML <small>Emmet: Tab para expandir · Esc para salir</small></div>
                 <textarea class="editor" id="html-editor" spellcheck="false"></textarea>
             </div>
-            <div class="editor-container">
+            <div class="editor-container" id="css-panel" data-label="CSS">
                 <div class="editor-header">CSS <small>Emmet: Tab para expandir · Esc para salir</small></div>
                 <textarea class="editor" id="css-editor" spellcheck="false"></textarea>
             </div>
-            <div class="editor-container">
+            <div class="editor-container" id="js-panel" data-label="JavaScript">
                 <div class="editor-header">JavaScript</div>
                 <textarea class="editor" id="js-editor" spellcheck="false"></textarea>
             </div>
         </div>
         <section class="output" aria-label="Resultado">
-            <div class="preview">
-                <div class="toolbar"><span>Vista previa</span><button id="run" type="button">Ejecutar</button></div>
-                <iframe id="preview-frame" title="Vista previa del código" sandbox="allow-scripts allow-modals"></iframe>
+            <div class="preview" id="preview-panel" data-label="Vista previa">
+                <div class="toolbar"><span>Vista previa</span></div>
+                <iframe id="preview-frame" title="Vista previa del código" sandbox="allow-scripts allow-modals allow-forms"></iframe>
             </div>
-            <section class="console" aria-label="Consola">
+            <section class="console" id="console-panel" data-label="Consola" aria-label="Consola">
                 <div class="toolbar"><span>Consola</span><button id="clear-console" type="button">Limpiar</button></div>
                 <div id="console-output" role="log" aria-live="polite" aria-label="Mensajes de consola"></div>
                 <p class="console-help">Mensajes y errores del código. Se limpia al ejecutar.</p>
             </section>
         </section>
+        <p class="empty-layout" hidden>No hay secciones visibles. Elegí una arriba o presioná “Restaurar paneles”.</p>
     </div>
     <script src="vendor/codemirror/lib/codemirror.js"></script>
     <script src="vendor/codemirror/mode/xml/xml.js"></script>
