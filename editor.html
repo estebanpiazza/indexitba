@@ -11,6 +11,13 @@
 <body>
     <header class="workspace-toolbar">
         <button id="run" type="button" title="Ejecutar (Ctrl+Enter o Cmd+Enter)">▶ Run</button>
+        <details class="symbols-picker" id="symbols-picker">
+            <summary>Símbolos</summary>
+            <div class="symbols-popover">
+                <p id="symbols-target">Insertar en HTML, donde está el cursor</p>
+                <div id="symbols-grid" role="group" aria-label="Símbolos para insertar"></div>
+            </div>
+        </details>
         <label><input id="auto-run" type="checkbox"> Actualizar automáticamente</label>
         <span id="run-status" role="status">Listo para ejecutar</span>
         <span id="save-status" role="status">Guardado automático en este navegador</span>

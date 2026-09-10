@@ -233,6 +233,40 @@ document.addEventListener('keydown', event => {
 const panels = [...document.querySelectorAll('[data-label]')];
 const toggles = [...document.querySelectorAll('[data-panel]')];
 const layout = document.querySelector('.container');
+const symbolsPicker = document.getElementById('symbols-picker');
+const symbolsTarget = document.getElementById('symbols-target');
+let symbolEditor = editors[0];
+editors.forEach((editor, index) => editor.on('focus', () => {
+    symbolEditor = editor;
+    symbolsTarget.textContent = `Insertar en ${['HTML', 'CSS', 'JavaScript'][index]}, donde está el cursor`;
+}));
+const symbols = ['[', ']', '{', '}', '(', ')', '<', '>', '/', '\\', '*', '?', '¡', '!', '¿',
+    '¨', '"', "'", '`', ';', ':', ',', '.', '=', '+', '-', '_', '&', '|', '#', '$', '%', '@', '^', '~', '°'];
+symbols.forEach(symbol => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = symbol;
+    button.setAttribute('aria-label', `Insertar ${symbol}`);
+    button.title = `Insertar ${symbol} en el cursor (reemplaza el texto seleccionado)`;
+    button.addEventListener('click', () => {
+        const index = editors.indexOf(symbolEditor);
+        if (panels[index].hidden) toggles[index].click();
+        symbolEditor.replaceSelection(symbol, 'end', '+input');
+        symbolsPicker.open = false;
+        symbolEditor.focus();
+    });
+    document.getElementById('symbols-grid').append(button);
+});
+document.addEventListener('click', event => {
+    if (!symbolsPicker.contains(event.target)) symbolsPicker.open = false;
+});
+symbolsPicker.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+        event.preventDefault();
+        symbolsPicker.open = false;
+        symbolsPicker.querySelector('summary').focus();
+    }
+});
 function refreshLayout() {
     const codeVisible = panels.slice(0, 3).some(panel => !panel.hidden);
     const outputVisible = panels.slice(3).some(panel => !panel.hidden);

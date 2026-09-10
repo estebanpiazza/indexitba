@@ -11,6 +11,13 @@ body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background:
 .panel-toggles { display: flex; flex-wrap: wrap; gap: 8px; border: 0; border-left: 1px solid #494949; padding: 2px 0 2px 10px; margin: 0; min-width: 0; }
 .panel-toggles legend { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .width-control input { width: 70px; margin: 0; }
+.symbols-picker { position: relative; }
+.symbols-picker summary { cursor: pointer; padding: 4px 8px; border: 1px solid #666; border-radius: 4px; background: #303030; }
+.symbols-picker summary:focus-visible { outline: 2px solid #82c9ff; outline-offset: 2px; }
+.symbols-popover { position: absolute; top: calc(100% + 6px); left: 0; z-index: 100; width: 272px; max-width: calc(100vw - 100px); padding: 10px; border: 1px solid #666; border-radius: 6px; background: #292929; box-shadow: 0 6px 20px #0008; }
+#symbols-target { margin: 0 0 8px; font-size: 11px; color: #bbb; }
+#symbols-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; }
+#symbols-grid button { min-height: 32px; padding: 4px; font: 17px/1.2 Consolas, Monaco, monospace; }
 .container { display: grid; grid-template-columns: minmax(0, var(--code-width, 50fr)) minmax(0, var(--output-width, 50fr)); flex: 1; min-height: 0; gap: 4px; }
 .container.single-column { grid-template-columns: minmax(0, 1fr); }
 .editors { display: flex; flex-direction: column; gap: 4px; background: #2d2d2d; padding: 4px; min-height: 0; min-width: 0; }
