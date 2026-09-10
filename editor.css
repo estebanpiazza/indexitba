@@ -1,0 +1,27 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background: #1e1e1e; color: #eee; }
+.container { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 100vh; height: 100dvh; gap: 4px; }
+.editors { display: grid; grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 4px; background: #2d2d2d; padding: 4px; min-height: 0; }
+.editor-container { display: flex; flex-direction: column; min-width: 0; min-height: 0; background: #212121; border-radius: 4px; overflow: hidden; }
+.editor-header { padding: 9px 12px; border-bottom: 1px solid #383838; font-size: 14px; }
+.editor-header small { color: #aaa; font-size: 11px; margin-left: 12px; }
+.CodeMirror { flex: 1; min-height: 0; width: 100%; font: 14px/1.5 Consolas, Monaco, monospace; }
+.output { display: grid; grid-template-rows: minmax(0, 2fr) minmax(150px, 1fr); min-height: 0; min-width: 0; gap: 4px; padding: 4px 4px 4px 0; }
+.preview, .console { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; padding: 6px 12px; background: #2d2d2d; font-size: 14px; }
+button { background: #3c3c3c; color: #eee; border: 1px solid #666; border-radius: 4px; padding: 5px 10px; cursor: pointer; }
+button:hover { background: #505050; }
+button:focus-visible { outline: 2px solid #82c9ff; outline-offset: 2px; }
+#preview-frame { width: 100%; flex: 1; min-height: 0; border: 0; background: #fff; }
+#console-output { flex: 1; min-height: 0; overflow: auto; font: 13px/1.5 Consolas, Monaco, monospace; }
+#console-output:empty::before { content: 'La consola está lista.'; display: block; padding: 10px 12px; color: #aaa; }
+.console-entry { margin: 0; padding: 6px 12px; border-bottom: 1px solid #333; white-space: pre-wrap; overflow-wrap: anywhere; }
+.console-entry.warn { color: #ffe298; background: #332d1c; }
+.console-entry.error { color: #ffaaa4; background: #382322; }
+.console-entry.info { color: #9ed5ff; }
+.console-help { margin: 0; padding: 6px 12px; font-size: 11px; color: #aaa; border-top: 1px solid #383838; }
+@media (max-width: 700px) {
+    .container { grid-template-columns: minmax(0, 1fr); height: auto; }
+    .editors { height: 75vh; min-height: 480px; }
+    .output { height: 70vh; min-height: 400px; padding: 0 4px 4px; }
+}
