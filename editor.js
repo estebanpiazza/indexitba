@@ -21,6 +21,36 @@ let updateTimer;
 const autoRun = document.getElementById('auto-run');
 const runStatus = document.getElementById('run-status');
 let pendingChanges = false;
+const draftKey = 'indexitba.editor.draft.v1';
+const saveStatus = document.getElementById('save-status');
+
+function saveDraft() {
+    try {
+        const [html, css, js] = editors.map(editor => editor.getValue());
+        localStorage.setItem(draftKey, JSON.stringify({ version: 1, html, css, js }));
+        saveStatus.textContent = 'Guardado en este navegador';
+    } catch {
+        saveStatus.textContent = 'No se pudo guardar. Copiá tu código antes de cerrar o recargar.';
+    }
+}
+
+function restoreDraft() {
+    try {
+        const stored = localStorage.getItem(draftKey);
+        if (stored === null) return false;
+        const draft = JSON.parse(stored);
+        if (!draft || draft.version !== 1 ||
+            !['html', 'css', 'js'].every(language => typeof draft[language] === 'string')) {
+            throw new Error('Invalid editor draft');
+        }
+        ['html', 'css', 'js'].forEach((language, index) => editors[index].setValue(draft[language]));
+        saveStatus.textContent = 'Código recuperado de este navegador';
+        return true;
+    } catch {
+        saveStatus.textContent = 'No se pudo recuperar el código guardado en este navegador.';
+        return false;
+    }
+}
 
 function clearConsole() {
     consoleOutput.replaceChildren();
@@ -111,7 +141,11 @@ function schedulePreview() {
         updatePreview();
     }, 700);
 }
+// Restore before subscribing, so loading a draft never overwrites it with partial values.
+const restoredDraft = restoreDraft();
 editors.forEach(editor => editor.on('change', () => {
+    // Save synchronously: even an immediate refresh must retain the latest edit.
+    saveDraft();
     pendingChanges = true;
     runStatus.textContent = 'Cambios sin ejecutar';
     schedulePreview();
@@ -192,4 +226,9 @@ document.getElementById('reset-layout').addEventListener('click', () => {
     layout.style.removeProperty('--output-width');
     refreshLayout();
 });
-updatePreview();
+if (restoredDraft) {
+    pendingChanges = true;
+    runStatus.textContent = 'Código recuperado · presioná Run para ejecutarlo';
+} else {
+    updatePreview();
+}
